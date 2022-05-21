@@ -44,10 +44,11 @@ class ProductController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show(Product $product)
+    public function show($alias)
     {
+        $product = Product::where('alias', $alias)->firstOrFail();
         return view('products.show', ['product' => $product]);
     }
 

@@ -20,7 +20,7 @@
                 <div class="font-bold text-xl mb-2">Price: <span class="text-green-800">{{ $product->price }} ₴</span></div>
             </div>
             <div class="px-6 pt-4 pb-2">
-                <a class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{{ $product->category_id }}</a>
+                <a href="{{ route('categories.show', $product->category->alias) }}" class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{{ $product->category->name }}</a>
             </div>
     </div>
 

@@ -20,7 +20,7 @@
                 <a class="font-semibold tracking-tight block cursor-pointer p-2 hover:text-blue-500 transition-colors duration-300" href="{{ route('products.index') }}">Products</a>
             </li>
             <li>
-                <a class="font-semibold tracking-tight block cursor-pointer p-2 hover:text-blue-500 transition-colors duration-300" href="{{ route('categories') }}">Categories</a>
+                <a class="font-semibold tracking-tight block cursor-pointer p-2 hover:text-blue-500 transition-colors duration-300" href="{{ route('categories.index') }}">Categories</a>
             </li>
             <li>
                 <a class="font-semibold tracking-tight block cursor-pointer p-2 hover:text-blue-500 transition-colors duration-300">Add

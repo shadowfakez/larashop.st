@@ -8,7 +8,7 @@
     @foreach($products as $product)
 
     <div class="max-w-sm rounded overflow-hidden p-4 m-4 group block max-w-xs mx-auto rounded-lg p-6 bg-white ring-1 ring-slate-900/5 space-y-3 hover:bg-fuchsia-200 hover:ring-rose-600">
-        <a href="{{ route('products.show', ['product' => $product]) }}">
+        <a href="{{ route('products.show', ['product' => $product->alias]) }}">
             <div class="grid place-items-center">
                 <img class="w-full @if($product->category_id == 1) w-48 h-96 @else h-48 w-96 @endif"
                      src="{{ asset($product->image) }}" alt="no image">
@@ -24,7 +24,7 @@
             </div>
         </a>
         <div class="px-6 pt-4 pb-2">
-            <a href="#" class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{{ $product->category_id }}</a>
+            <a href="{{ route('categories.show', $product->category->alias) }}" class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{{ $product->category->name }}</a>
         </div>
     </div>
 
