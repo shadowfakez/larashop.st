@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('order_id', false, true);
             $table->bigInteger('product_id', false, true);
-            $table->bigInteger('count', false, true)->default(0);
+            $table->bigInteger('count', false, true)->default(1);
             $table->timestamps();
 
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');

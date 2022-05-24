@@ -24,4 +24,13 @@ class Product extends Model
     {
         return $this->hasMany(Order::class);
     }
+
+    public function getValue()
+    {
+        if (!is_null($this->pivot->count)) {
+            return $this->price * $this->pivot->count;
+        } else {
+            return $this->price;
+        }
+    }
 }
