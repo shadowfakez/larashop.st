@@ -16,8 +16,18 @@
                     {{ $product->description }}
                 </p>
             </div>
-            <div class="px-6 py-4 p-2">
-                <div class="font-bold text-xl mb-2">Price: <span class="text-green-800">{{ $product->price }} ₴</span></div>
+            <div class="flex justify-center px-6 py-4 p-2">
+                <div class="font-bold text-xl mb-2">
+
+                    <form action="{{ route('add-to-cart', $product) }}" method="POST">
+                        @csrf
+                        Price: <span class="text-green-800 px-4 mr-16">{{ $product->price }} ₴</span>
+                        <button type="submit" class="bg-transparent hover:bg-fuchsia-200 text-rose-400 font-semibold hover:text-rose-600 py-2 px-4 border border-fuchsia-200 hover:border-rose-600 rounded">
+                            Add to cart
+                        </button>
+                    </form>
+
+                </div>
             </div>
             <div class="px-6 pt-4 pb-2">
                 <a href="{{ route('categories.show', $product->category->alias) }}" class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{{ $product->category->name }}</a>

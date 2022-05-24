@@ -19,3 +19,8 @@ Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
 
 Route::resource('/products', ProductController::class);
 Route::resource('/categories', CategoryController::class);
+
+Route::get('/cart', 'App\Http\Controllers\CartController@cart')->name('cart');
+Route::get('/cart/place', 'App\Http\Controllers\CartController@cartPlace')->name('cart-place');
+Route::post('/cart/add/{id}', 'App\Http\Controllers\CartController@addToCart')->name('add-to-cart');
+Route::post('/cart/remove/{id}', 'App\Http\Controllers\CartController@removeFromCart')->name('remove-from-cart');
