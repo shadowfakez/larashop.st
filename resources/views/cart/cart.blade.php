@@ -50,7 +50,7 @@
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                             <span
                                                 class="inline-block mx-4 px-4 py-2 border border-gray-500 text-gray-800 font-medium text-xs leading-tight uppercase rounded">{{ $product->pivot->count }}</span>
-                                            <form action="{{ route('add-to-cart', $product) }}" class="inline-block"
+                                            <form action="{{ route('add.to.cart', $product) }}" class="inline-block"
                                                   method="POST">
                                                 @csrf
                                                 <button type="submit"
@@ -58,7 +58,7 @@
                                                     +
                                                 </button>
                                             </form>
-                                            <form action="{{ route('remove-from-cart', $product) }}"
+                                            <form action="{{ route('remove.from.cart', $product) }}"
                                                   class="inline-block"
                                                   method="POST">
                                                 @csrf
@@ -87,9 +87,9 @@
                 </div>
             </div>
         </div>
-        <div class="flex justify-end items-center px-6 py-4 border-b border-b-gray-60 shadow-sm max-w-screen-2xl mx-auto">
+        <div class="flex justify-end items-center px-8 py-4 border-b border-b-gray-60 shadow-sm max-w-screen-2xl mx-auto">
             <h1 class="items-center text-3xl font-bold inline-block mr-16">Total value: {{ $order->getTotalValue() }} ₴</h1>
-            <a href="#" class="items-center bg-transparent hover:bg-fuchsia-200 text-rose-400 font-semibold hover:text-rose-600 border border-fuchsia-200 hover:border-rose-600 rounded inline-block py-2 px-4 text-xl">Confirm</a>
+            <a href="{{ route('cart.order') }}" class="items-center bg-transparent hover:bg-fuchsia-200 text-rose-400 font-semibold hover:text-rose-600 border border-fuchsia-200 hover:border-rose-600 rounded inline-block py-2 px-4 text-xl">Confirm</a>
         </div>
     @endif
 

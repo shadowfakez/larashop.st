@@ -19,7 +19,7 @@
             <div class="flex justify-center px-6 py-4 p-2">
                 <div class="font-bold text-xl mb-2">
 
-                    <form action="{{ route('add-to-cart', $product) }}" method="POST">
+                    <form action="{{ route('add.to.cart', $product) }}" method="POST">
                         @csrf
                         Price: <span class="text-green-800 px-4 mr-16">{{ $product->price }} ₴</span>
                         <button type="submit" class="bg-transparent hover:bg-fuchsia-200 text-rose-400 font-semibold hover:text-rose-600 py-2 px-4 border border-fuchsia-200 hover:border-rose-600 rounded">
