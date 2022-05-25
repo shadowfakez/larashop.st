@@ -11,13 +11,12 @@ class CartController extends Controller
     public function cart()
     {
         $orderId = session('orderId');
-
-        if (is_null($orderId)) {
-            $order = Order::findOrFail($orderId);
-            session(['orderId' => $order->id]);
-        }
         $order = Order::find($orderId);
-        return view('cart.cart', compact('order'));
+        if (is_null($orderId)) {
+            return view('cart.cart', compact('order'));
+        } else {
+            return view('cart.cart', compact('order'));
+        }
     }
 
     public function cartOrder()
@@ -27,6 +26,7 @@ class CartController extends Controller
             return redirect('home');
         }
         $order = Order::find($orderId);
+
         return view('cart.order', compact('order'));
     }
 

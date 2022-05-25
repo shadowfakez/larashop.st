@@ -7,7 +7,7 @@
     </div>
 
     @if($order == null)
-        <h1 class="text-center text-3xl font-bold">Cart is empty</h1>
+        <h1 class="text-center text-3xl font-bold py-6">Your cart is empty</h1>
     @else
         <div class="flex flex-col">
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
