@@ -25,3 +25,5 @@ Route::get('/cart/order', 'App\Http\Controllers\CartController@cartOrder')->name
 Route::post('/cart/confirm', 'App\Http\Controllers\CartController@cartConfirm')->name('cart.confirm');
 Route::post('/cart/add/{id}', 'App\Http\Controllers\CartController@addToCart')->name('add.to.cart');
 Route::post('/cart/remove/{id}', 'App\Http\Controllers\CartController@removeFromCart')->name('remove.from.cart');
+
+require __DIR__.'/auth.php';
