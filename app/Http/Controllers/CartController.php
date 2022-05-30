@@ -40,7 +40,7 @@ class CartController extends Controller
         $order = Order::find($orderId);
         $success = $order->saveOrder($request->name, $request->phone);
 
-        return redirect()->route('home')->with('confirm', 'Your order has been confirmed!');
+        return redirect()->route('home')->with('success', 'Your order has been confirmed!');
     }
 
     public function addToCart($productId)
@@ -64,7 +64,7 @@ class CartController extends Controller
 
         $product = Product::findOrFail($productId);
 
-        return redirect()->route('cart')->with('added', $product->name . ' has been added to the cart' );
+        return redirect()->route('cart')->with('success', $product->name . ' has been added to the cart' );
     }
 
     public function removeFromCart($productId)
@@ -89,6 +89,6 @@ class CartController extends Controller
 
         $product = Product::findOrFail($productId);
 
-        return redirect()->route('cart')->with('removed', $product->name . ' has been removed from the cart');
+        return redirect()->route('cart')->with('success', $product->name . ' has been removed from the cart');
     }
 }

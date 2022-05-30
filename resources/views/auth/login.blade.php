@@ -1,47 +1,50 @@
 @extends('auth.layout')
 
+@section('header')
+    Login
+@endsection
+
 @section('form')
-    <form action="{{ route('login') }}" method="POST">
+    <form action="{{ route('login') }}" method="POST" class="px-8 pt-6 pb-2 mb-4 bg-white rounded">
         @csrf
-        <p class="mb-4 text-center font-bold text-lg">Please login to your account</p>
         <div class="mb-4">
+            <label class="block mb-2 text-sm font-bold text-gray-700" for="email">
+                Email
+            </label>
             <input
+                class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                id="email"
                 type="email"
-                class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding transition ease-in-out m-0 border border-fuchsia-200 hover:border-rose-600 shadow-lg rounded-lg focus:border-rose-600 active:border-rose-600 focus:outline-none focus:ring-rose-500 focus:ring-1"
-                id="exampleFormControlInput1"
                 name="email"
                 placeholder="Email"
             />
         </div>
+
         <div class="mb-4">
+            <label class="block mb-2 text-sm font-bold text-gray-700" for="password">
+                Password
+            </label>
             <input
+                class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                id="password"
                 type="password"
-                class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding transition ease-in-out m-0 border border-fuchsia-200 hover:border-rose-600 shadow-lg rounded-lg focus:border-rose-600 active:border-rose-600 focus:outline-none focus:ring-rose-500 focus:ring-1"
-                id="exampleFormControlInput1"
                 name="password"
-                placeholder="Password"
+                placeholder="******************"
             />
         </div>
-        <div class="text-center pt-1 mb-12 pb-1">
+        <div class="mb-6 text-center">
             <button
-                class="inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3 bg-gradient-to-r from-rose-600 to-fuchsia-200 focus:border-rose-600 active:border-rose-600 focus:outline-none focus:ring-rose-500 focus:ring-1"
+                class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
                 type="submit"
-                data-mdb-ripple="true"
-                data-mdb-ripple-color="light">
-                Log in
-            </button>
-            <a class="text-gray-500" href="#">Forgot password?</a>
-        </div>
-        <div class="flex items-center justify-between pb-6">
-            <p class="mb-0 mr-2">Don't have an account?</p>
-            <button
-                type="button"
-                class="inline-block px-6 py-2 border-2 border-red-600 text-red-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
-                data-mdb-ripple="true"
-                data-mdb-ripple-color="light"
             >
-                Danger
+                Login
             </button>
+        </div>
+        <hr class="mb-4 border-t"/>
+        <div class="text-center">
+            <a class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800" href="#">
+                Forgot Password?
+            </a>
         </div>
     </form>
 @endsection

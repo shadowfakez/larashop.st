@@ -1,33 +1,91 @@
 @extends('layouts.layout')
 
+@section('header')
+    @yield('header')
+@endsection
+
 @section('content')
-    <section class="h-full gradient-form md:h-screen justify-items-center">
-        <div class="container py-12 px-6 h-full mx-auto">
-            <div class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
-                <div class="xl:w-10/12">
-                    <div class="block bg-white border border border-fuchsia-200 hover:border-rose-600 shadow-lg rounded-lg">
-                        <div class="lg:flex lg:flex-wrap g-0">
-                            <div class="lg:w-6/12 px-4 md:px-0">
-                                <div class="md:p-12 md:mx-6">
-                                    @yield('form')
-                                </div>
-                            </div>
-                            <div
-                                class="lg:w-6/12 flex items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none bg-gradient-to-r from-rose-600 to-fuchsia-200">
-                                <div class="text-white px-4 py-6 md:p-12 md:mx-6">
-                                    <h4 class="text-xl text-black text-center font-semibold mb-6">Welcome to <span class="text-blue-800">Lara</span>shop</h4>
-                                    <p class="text-sm text-black">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                        consequat.
-                                    </p>
-                                </div>
-                            </div>
+    <div class="py-5 mt-5">
+        <div class='overflow-x-auto w-full'>
+            <div
+                class="mx-auto max-w-xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
+                {{--<form class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
+                    <div class="mb-4">
+                        <label class="block mb-2 text-sm font-bold text-gray-700" for="name">
+                            Name
+                        </label>
+                        <input
+                            class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                            id="name"
+                            type="text"
+                            placeholder="Name"
+                        />
+                    </div>
+                    <div class="mb-4">
+                        <label class="block mb-2 text-sm font-bold text-gray-700" for="email">
+                            Email
+                        </label>
+                        <input
+                            class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                            id="email"
+                            type="email"
+                            placeholder="Email"
+                        />
+                    </div>
+                    <div class="mb-4 md:flex md:justify-between">
+                        <div class="mb-4 md:mr-2 md:mb-0">
+                            <label class="block mb-2 text-sm font-bold text-gray-700" for="password">
+                                Password
+                            </label>
+                            <input
+                                class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                id="password"
+                                type="password"
+                                placeholder="******************"
+                            />
+                            <p class="text-xs italic text-red-500">Please choose a password.</p>
+                        </div>
+                        <div class="md:ml-2">
+                            <label class="block mb-2 text-sm font-bold text-gray-700" for="c_password">
+                                Confirm Password
+                            </label>
+                            <input
+                                class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                id="c_password"
+                                type="password"
+                                placeholder="******************"
+                            />
                         </div>
                     </div>
-                </div>
+                    <div class="mb-6 text-center">
+                        <button
+                            class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                            type="button"
+                        >
+                            Register Account
+                        </button>
+                    </div>
+                    <hr class="mb-6 border-t"/>
+                    <div class="text-center">
+                        <a
+                            class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
+                            href="#"
+                        >
+                            Forgot Password?
+                        </a>
+                    </div>
+                    <div class="text-center">
+                        <a
+                            class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
+                            href="./index.html"
+                        >
+                            Already have an account? Login!
+                        </a>
+                    </div>
+                </form>--}}
+                @yield('form')
             </div>
+
         </div>
-    </section>
+    </div>
 @endsection

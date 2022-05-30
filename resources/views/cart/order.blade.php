@@ -1,9 +1,10 @@
 @extends('layouts.layout')
 
+@section('header')
+    Please, Confirm Your Order
+@endsection
+
 @section('content')
-    <div class="lg:items-center md:justify-between px-16 py-6 border-b border-b-gray-60 shadow-lg max-w-screen-2xl mx-auto">
-        <h1 class="text-center text-3xl font-bold">Please, Confirm Your Order</h1>
-    </div>
     <div class="pt-4">
         <div class="flex justify-center items-center px-6 py-6 max-w-screen-2xl mx-auto">
             <h3 class="text-center text-xl font-bold sm:text-center">Total value of Your Order: {{ $order->getTotalValue() }} ₴</h3>
@@ -21,7 +22,7 @@
                         </label>
                     </div>
                     <div class="md:w-3/5 pb-2">
-                        <input class="items-center bg-transparent hover:bg-fuchsia-200 text-rose-400 font-semibold hover:text-rose-600 border-2 border-fuchsia-200 hover:border-rose-600 rounded w-full py-2 px-4 focus:outline-none focus:bg-white focus:border-rose-600"
+                        <input class="items-center bg-transparent font-semibold w-full py-2 px-4 bg-gray-200 text-blue-800 border rounded border-gray-500 hover:border-indigo-200 hover:bg-indigo-100"
                             id="name" name="name" type="text">
                     </div>
                 </div>
@@ -32,14 +33,14 @@
                         </label>
                     </div>
                     <div class="md:w-3/5 pb-2">
-                        <input class="items-center bg-transparent hover:bg-fuchsia-200 text-rose-400 font-semibold hover:text-rose-600 border-2 border-fuchsia-200 hover:border-rose-600 rounded w-full py-2 px-4 focus:outline-none focus:bg-white focus:border-rose-600"
+                        <input class="items-center bg-transparent font-semibold w-full py-2 px-4 bg-gray-200 text-blue-800 border rounded border-gray-500 hover:border-indigo-200 hover:bg-indigo-100"
                             id="phone" name="phone" type="text">
                     </div>
                 </div>
                 <div class="md:flex md:items-center">
                     <div class="md:w-2/5 pb-2"></div>
                     <div class="md:w-3/5 pb-2">
-                        <button class="items-center bg-transparent hover:bg-fuchsia-200 text-rose-400 font-semibold hover:text-rose-600 border-2 border-fuchsia-200 hover:border-rose-600 rounded w-full py-2 px-4"
+                        <button class="bg-transparent bg-gray-200 text-blue-800 font-semibold py-2 px-4 border rounded border-gray-700 hover:border-indigo-200 hover:bg-indigo-100"
                             type="submit">
                             Confirm the order
                         </button>

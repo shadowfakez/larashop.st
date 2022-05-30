@@ -1,55 +1,79 @@
 @extends('auth.layout')
 
+@section('header')
+    Create an Account!
+@endsection
+
 @section('form')
-    <form action="{{ route('register') }}" method="POST">
+    <form action="{{ route('register') }}" method="POST" class="px-8 pt-6 pb-2 mb-4 bg-white rounded">
         @csrf
-        <p class="mb-4 text-center font-bold text-lg">Please register to your account</p>
         <div class="mb-4">
+            <label class="block mb-2 text-sm font-bold text-gray-700" for="name">
+                Name
+            </label>
             <input
-                type="text"
-                class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding transition ease-in-out m-0 border border-fuchsia-200 hover:border-rose-600 shadow-lg rounded-lg focus:border-rose-600 active:border-rose-600 focus:outline-none focus:ring-rose-500 focus:ring-1"
+                class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                 id="name"
+                type="text"
                 name="name"
-                :value="old('name')"
-                placeholder="Username"
+                placeholder="Name"
             />
         </div>
         <div class="mb-4">
+            <label class="block mb-2 text-sm font-bold text-gray-700" for="email">
+                Email
+            </label>
             <input
-                type="email"
-                class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding transition ease-in-out m-0 border border-fuchsia-200 hover:border-rose-600 shadow-lg rounded-lg focus:border-rose-600 active:border-rose-600 focus:outline-none focus:ring-rose-500 focus:ring-1"
+                class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                 id="email"
+                type="email"
                 name="email"
-                :value="old('email')"
                 placeholder="Email"
             />
         </div>
-        <div class="mb-4">
-            <input
-                type="password"
-                class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding transition ease-in-out m-0 border border-fuchsia-200 hover:border-rose-600 shadow-lg rounded-lg focus:border-rose-600 active:border-rose-600 focus:outline-none focus:ring-rose-500 focus:ring-1"
-                id="password"
-                name="password"
-                placeholder="Password"
-            />
+
+        <div class="mb-4 md:flex md:justify-between">
+            <div class="mb-4 md:mr-2 md:mb-0">
+                <label class="block mb-2 text-sm font-bold text-gray-700" for="password">
+                    Password
+                </label>
+                <input
+                    class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                    id="password"
+                    type="password"
+                    name="password"
+                    placeholder="******************"
+                />
+            </div>
+            <div class="md:ml-2">
+                <label class="block mb-2 text-sm font-bold text-gray-700" for="password_confirmation">
+                    Confirm Password
+                </label>
+                <input
+                    class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                    id="password_confirmation"
+                    name="password_confirmation"
+                    type="password"
+                    placeholder="******************"
+                />
+            </div>
         </div>
-        <div class="mb-4">
-            <input
-                type="password"
-                class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding transition ease-in-out m-0 border border-fuchsia-200 hover:border-rose-600 shadow-lg rounded-lg focus:border-rose-600 active:border-rose-600 focus:outline-none focus:ring-rose-500 focus:ring-1"
-                id="password_confirmation"
-                name="password_confirmation"
-                placeholder="Confirm Password"
-            />
-        </div>
-        <div class="text-center pt-1 mb-12 pb-1">
+        <div class="mb-6 text-center">
             <button
-                class="inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3 bg-gradient-to-r from-rose-600 to-fuchsia-200 focus:border-rose-600 active:border-rose-600 focus:outline-none focus:ring-rose-500 focus:ring-1"
+                class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
                 type="submit"
-                data-mdb-ripple="true"
-                data-mdb-ripple-color="light">
-                Register
+            >
+                Register Account
             </button>
+        </div>
+        <hr class="mb-4 border-t"/>
+        <div class="text-center">
+            <a
+                class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
+                href="./index.html"
+            >
+                Already have an account? Login!
+            </a>
         </div>
     </form>
 @endsection
