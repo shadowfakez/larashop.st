@@ -1,9 +1,10 @@
 @extends('layouts.layout')
 
 @section('header')
-    Home Page
+    Admin Home
 @endsection
 
 @section('content')
+
 
 @endsection

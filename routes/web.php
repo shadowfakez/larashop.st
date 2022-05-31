@@ -16,9 +16,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
+Route::get('/dashboard', 'App\Http\Controllers\HomeController@dashboard')->name('dashboard')->middleware('auth');
 
 Route::resource('/products', ProductController::class);
 Route::resource('/categories', CategoryController::class);
+
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/', 'App\Http\Controllers\Admin\AdminController@index')->name('admin.home');
+    Route::resource('/orders', App\Http\Controllers\Admin\OrderController::class);
+});
 
 Route::get('/cart', 'App\Http\Controllers\CartController@cart')->name('cart');
 Route::get('/cart/order', 'App\Http\Controllers\CartController@cartOrder')->name('cart.order');
@@ -26,4 +32,4 @@ Route::post('/cart/confirm', 'App\Http\Controllers\CartController@cartConfirm')-
 Route::post('/cart/add/{id}', 'App\Http\Controllers\CartController@addToCart')->name('add.to.cart');
 Route::post('/cart/remove/{id}', 'App\Http\Controllers\CartController@removeFromCart')->name('remove.from.cart');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
