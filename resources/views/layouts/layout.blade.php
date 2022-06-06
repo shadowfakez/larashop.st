@@ -16,27 +16,6 @@
             display: block;
         }
     </style>
-    <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId      : '{your-app-id}',
-                cookie     : true,
-                xfbml      : true,
-                version    : '{api-version}'
-            });
-
-            FB.AppEvents.logPageView();
-
-        };
-
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
 </head>
 <body class="antialiased bg-gray-200">
 <header class="lg:px-16 px-6 bg-white flex flex-wrap items-center lg:py-0 py-2">
@@ -60,7 +39,7 @@
                        href="{{ route('products.index') }}">Products</a></li>
                 <li>
                     <a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 hover:bg-indigo-100"
-                       href="{{ route('categories.index') }}">Categories</a></li>
+                       href="{{ route('categories.main') }}">Categories</a></li>
                 <li>
                     <a class="lg:p-4 py-3 mr-48 px-0 block border-b-2 border-transparent hover:border-indigo-400 hover:bg-indigo-100"
                        href="{{ route('cart') }}">Cart</a></li>
@@ -85,7 +64,10 @@
                                 </button>
                                 <ul class="dropdown-menu absolute hidden text-gray-700 pt-1 w-36">
                                     <li class=""><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('dashboard') }}">Dashboard</a></li>
+                                    @if (Auth::user()->isAdmin())
                                     <li class=""><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('admin.home') }}">Admin Panel</a></li>
+                                    @endif
+
                                 </ul>
                             </div>
                         </li>
@@ -108,7 +90,7 @@
     @foreach($errors->all() as $error)
         <div
             class="flex flex-row items-center justify-between border-b border-indigo-100 shadow-sm mx-auto shadow-inner rounded p-3 bg-red-200 hover:border-indigo-200">
-            <p class="self-center">{{ $error }}</p>
+            <p class="self-center"><b>Error! </b>{{ $error }}</p>
             <strong class="text-xl align-center cursor-pointer alert-del">&times;</strong>
         </div>
     @endforeach
@@ -117,7 +99,17 @@
     <div
         class="flex flex-row items-center justify-between border-b border-indigo-100 shadow-sm mx-auto shadow-inner rounded p-3 bg-green-200 hover:border-indigo-200">
         <p class="self-center">
-            {{ session('success') }}
+            <b>Success! </b>{{ session('success') }}
+        </p>
+        <strong class="text-xl align-center cursor-pointer alert-del">&times;</strong>
+    </div>
+@endif
+
+@if (session('warning'))
+    <div
+        class="flex flex-row items-center justify-between border-b border-indigo-100 shadow-sm mx-auto shadow-inner rounded p-3 bg-yellow-200 hover:border-indigo-200">
+        <p class="self-center">
+            <b>Warning! </b>{{ session('warning') }}
         </p>
         <strong class="text-xl align-center cursor-pointer alert-del">&times;</strong>
     </div>

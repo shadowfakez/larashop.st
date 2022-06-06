@@ -1,10 +1,9 @@
-@extends('layouts.layout')
+@extends('admin.layout')
 
 @section('header')
-    Admin Home
+    Admin Panel
 @endsection
 
-@section('content')
-
+@section('admin-content')
 
 @endsection

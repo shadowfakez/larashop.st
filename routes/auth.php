@@ -34,11 +34,11 @@ Route::middleware('guest')->group(function () {
     Route::post('reset-password', [NewPasswordController::class, 'store'])
                 ->name('password.update');*/
 
-    Route::get('/facebook', [SocialController::class, 'facebookRedirect'])->name('auth.facebook');
-    Route::get('/facebook/callback', [SocialController::class, 'loginWithFacebook']);
+    /*Route::get('facebook', [SocialController::class, 'facebookRedirect'])->name('auth.facebook');
+    Route::get('facebook/callback', [SocialController::class, 'loginWithFacebook']);*/
 
-    Route::get('/google', [SocialController::class, 'googleRedirect'])->name('auth.google');
-    Route::get('/google/callback', [SocialController::class, 'loginWithGoogle']);
+    Route::get('google', [SocialController::class, 'googleRedirect'])->name('auth.google');
+    Route::get('google/callback', [SocialController::class, 'loginWithGoogle']);
 });
 
 Route::middleware('auth')->group(function () {

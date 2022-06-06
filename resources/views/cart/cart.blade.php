@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    @if($order == null)
+    @if(is_null($order))
         <div class="py-2 inline-block items-center min-w-full sm:px-6 lg:px-8">
             <h1 class="text-center text-3xl font-bold py-6">Your cart is empty</h1>
         </div>

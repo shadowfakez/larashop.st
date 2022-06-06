@@ -48,12 +48,13 @@ class SocialController extends Controller
 
     public function loginWithGoogle()
     {
+
         try {
             $user = Socialite::driver('google')->user();
             $isUser = User::where('google_id', $user->id)->first();
             if ($isUser) {
                 Auth::login($isUser);
-                return redirect()->route('dashboard');
+                return redirect()->route('home');
             } else {
                 $createUser = User::create([
                     'name' => $user->name,
@@ -62,8 +63,8 @@ class SocialController extends Controller
                     'password' => encrypt(rand(1,10000)),
                 ]);
 
-                Auth::login($createUser);
-                return redirect()->route('dashboard');
+                Auth::login($createUser, true);
+                return redirect()->route('home');
             }
         } catch(Exception $exception) {
             dd($exception->getMessage());

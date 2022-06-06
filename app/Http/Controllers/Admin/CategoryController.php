@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('categories.index', ['categories' => Category::all()]);
+        return view('admin.categories.index', ['categories' => Category::all()]);
     }
 
     /**
@@ -50,7 +51,7 @@ class CategoryController extends Controller
         $category = Category::where('alias', $alias)->firstOrFail();
         $products = Product::where('category_id', $category->id)->paginate(3);
         $category_name = $category->name;
-        return view('categories.show', ['category_name' => $category_name, 'products' => $products]);
+        return view('admin.categories.show', ['category_name' => $category_name, 'products' => $products]);
     }
 
     /**

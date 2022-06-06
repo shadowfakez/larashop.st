@@ -15,17 +15,22 @@
         <div class="flex justify-center items-center px-6 py-4 max-w-screen-2xl mx-auto">
             <form class="w-full max-w-sm" method="POST" action="{{ route('cart.confirm', $order) }}">
                 @csrf
+
+                @guest
                 <div class="md:flex md:items-center mb-6">
                     <div class="md:w-2/5 pb-2">
                         <label class="block text-gray-500 font-bold md:text-center mb-1 md:mb-0 pr-4" for="inline-full-name">
                             Full Name
                         </label>
                     </div>
+
                     <div class="md:w-3/5 pb-2">
                         <input class="items-center bg-transparent font-semibold w-full py-2 px-4 bg-gray-200 text-blue-800 border rounded border-gray-500 hover:border-indigo-200 hover:bg-indigo-100"
                             id="name" name="name" type="text">
                     </div>
                 </div>
+                @endauth
+
                 <div class="md:flex md:items-center mb-6">
                     <div class="md:w-2/5 pb-2">
                         <label class="block text-gray-500 font-bold md:text-center mb-1 md:mb-0 pr-4" for="inline-password">

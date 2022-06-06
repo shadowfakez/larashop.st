@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,14 +18,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
 Route::get('/dashboard', 'App\Http\Controllers\HomeController@dashboard')->name('dashboard')->middleware('auth');
+Route::get('/categories', 'App\Http\Controllers\HomeController@categoriesMain')->name('categories.main');
+Route::get('/category-show/{alias}', 'App\Http\Controllers\HomeController@categoryShow')->name('category.show');
+
 
 Route::resource('/products', ProductController::class);
-Route::resource('/categories', CategoryController::class);
 
-Route::prefix('admin')->middleware('auth')->group(function () {
+Route::prefix('admin')->middleware('auth')->middleware('is_admin')->group(function () {
     Route::get('/', 'App\Http\Controllers\Admin\AdminController@index')->name('admin.home');
-    Route::resource('/orders', App\Http\Controllers\Admin\OrderController::class);
+    Route::resource('/orders', OrderController::class);
+    Route::resource('/categories', CategoryController::class);
 });
+
 
 Route::get('/cart', 'App\Http\Controllers\CartController@cart')->name('cart');
 Route::get('/cart/order', 'App\Http\Controllers\CartController@cartOrder')->name('cart.order');

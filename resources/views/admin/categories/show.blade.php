@@ -1,10 +1,10 @@
-@extends('layouts.layout')
+@extends('admin.layout')
 
 @section('header')
     {{ $category_name }}
 @endsection
 
-@section('content')
+@section('admin-content')
     <div class="flex flex-col xl:flex-row md:justify-between px-6 py-2 max-w-screen-2xl mx-auto">
         @foreach($products as $product)
 
@@ -30,7 +30,7 @@
                     </a>
                 </div>
                 <div class="px-6 pt-4">
-                    <a href="{{ route('category.show', $product->category->alias) }}"
+                    <a href="{{ route('categories.show', $product->category->alias) }}"
                        class="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 border border-indigo-100 hover:border-indigo-200 hover:bg-gray-200">#{{ $product->category->name }}</a>
                 </div>
                 <div class="flex justify-center px-6 py-4">
