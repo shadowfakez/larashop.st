@@ -20,7 +20,7 @@ class HomeController extends Controller
 
     public function categoriesMain()
     {
-        return view('categories.index', ['categories' => Category::all()]);
+        return view('categories.index', ['categories' => Category::orderBy('created_at', 'asc')->paginate(4)]);
     }
 
     public function categoryShow($alias)

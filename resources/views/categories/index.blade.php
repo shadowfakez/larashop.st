@@ -7,7 +7,6 @@
 @section('content')
     <div class="flex flex-col xl:flex-row md:justify-between px-6 py-2 max-w-screen-2xl mx-auto">
         @foreach($categories as $category)
-
             <a href="{{ route('category.show', ['alias' => $category->alias]) }}">
                 <div class="max-w-md rounded overflow-hidden p-4 m-4 group block max-w-xs mx-auto rounded-lg bg-white ring-1 ring-slate-900/5 space-y-3 border-indigo-400">
                     <div class="grid place-items-center">
@@ -24,7 +23,7 @@
             </a>
         @endforeach
     </div>
-    {{--<div class="items-center p-2 md:justify-between max-w-screen-2xl mx-auto">
-        {{ $category->links() }}
-    </div>--}}
+    <div class="items-center p-2 md:justify-between max-w-screen-2xl mx-auto">
+        {{ $categories->links() }}
+    </div>
 @endsection
