@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.categories.index', ['categories' => Category::all()]);
+        return view('admin.products.index', ['products' => Product::orderBy('created_at', 'asc')->paginate(10)]);
     }
 
     /**
@@ -26,7 +26,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+
+        return view('admin.products.create', ['categories' => Category::all()]);
     }
 
     /**
@@ -37,8 +38,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        Category::create($request->all());
-        return redirect()->route('admin.categories.index');
+        Product::create($request->all());
+        return redirect()->route('admin.products.index');
     }
 
     /**
@@ -49,9 +50,9 @@ class CategoryController extends Controller
      */
     public function show($alias)
     {
-        $category = Category::where('alias', $alias)->firstOrFail();
+        $product = Product::where('alias', $alias)->firstOrFail();
 
-        return view('admin.categories.show', compact('category'));
+        return view('admin.products.show', compact('product'));
     }
 
     /**
@@ -62,9 +63,10 @@ class CategoryController extends Controller
      */
     public function edit($alias)
     {
-        $category = Category::where('alias', $alias)->firstOrFail();
+        $product = Product::where('alias', $alias)->firstOrFail();
+        $categories = Category::all();
 
-        return view('admin.categories.edit', compact('category'));
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -76,14 +78,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $alias)
     {
-        $category = Category::where('alias', $alias)->firstOrFail();
+        $product = Product::where('alias', $alias)->firstOrFail();
         $data = $request->all();
-        $category->fill($data);
-        if ($category->isDirty()) {
-            $category->save();
-            return redirect()->route('admin.categories.index')->with('success', 'Category ' . $category->name . ' was successfully updated');
+        $product->fill($data);
+        if ($product->isDirty()) {
+            $product->save();
+            return redirect()->route('admin.products.index')->with('success', 'Product ' . $product->name . ' was successfully updated');
         } else {
-            return redirect()->route('admin.categories.index')->with('warning', 'There is nothing to update');
+            return redirect()->route('admin.products.index')->with('warning', 'There is nothing to update');
         }
     }
 
@@ -95,8 +97,8 @@ class CategoryController extends Controller
      */
     public function destroy($alias)
     {
-        $category = Category::where('alias', $alias)->firstOrFail();
-        $category->delete();
-        return redirect()->route('admin.categories.index')->with('success', 'Category ' . $category->name . ' was successfully deleted');
+        $product = Product::where('alias', $alias)->firstOrFail();
+        $product->delete();
+        return redirect()->route('admin.products.index')->with('success', 'Product ' . $product->name . ' was successfully deleted');
     }
 }

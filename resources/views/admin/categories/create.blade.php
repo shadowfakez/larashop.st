@@ -5,7 +5,7 @@
 @section('admin-content')
     <div class="py-5">
         <div class='overflow-x-auto w-full'>
-            <form action="{{ route('categories.store') }}" method="POST" class="px-8 pt-6 pb-2 mb-4 bg-white rounded">
+            <form action="{{ route('admin.categories.store') }}" method="POST" class="px-8 pt-6 pb-2 mb-4 bg-white rounded">
                 @csrf
                 <div class="mb-6">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name of category</label>

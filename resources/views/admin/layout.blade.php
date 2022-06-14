@@ -19,12 +19,17 @@
                         </a>
                     </li>
                     <li class="flex w-full justify-between text-gray-300 cursor-pointer items-center mb-6">
-                        <a href="{{ route('orders.index') }}" class="flex items-center focus:outline-none">
+                        <a href="{{ route('admin.orders.index') }}" class="flex items-center focus:outline-none">
                             <span class="text-sm ml-2">Orders</span>
                         </a>
                     </li>
                     <li class="flex w-full justify-between text-gray-300 cursor-pointer items-center mb-6">
-                        <a href="{{ route('categories.index') }}" class="flex items-center focus:outline-none">
+                        <a href="{{ route('admin.products.index') }}" class="flex items-center focus:outline-none">
+                            <span class="text-sm ml-2">Products</span>
+                        </a>
+                    </li>
+                    <li class="flex w-full justify-between text-gray-300 cursor-pointer items-center mb-6">
+                        <a href="{{ route('admin.categories.index') }}" class="flex items-center focus:outline-none">
                             <span class="text-sm ml-2">Categories</span>
                         </a>
                     </li>

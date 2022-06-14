@@ -24,10 +24,11 @@ Route::get('/category-show/{alias}', 'App\Http\Controllers\HomeController@catego
 
 Route::resource('/products', ProductController::class);
 
-Route::prefix('admin')->middleware('auth')->middleware('is_admin')->group(function () {
-    Route::get('/', 'App\Http\Controllers\Admin\AdminController@index')->name('admin.home');
+Route::prefix('admin')->name('admin.')->middleware('auth')->middleware('is_admin')->group(function () {
+    Route::get('/', 'App\Http\Controllers\Admin\AdminController@index')->name('home');
     Route::resource('/orders', OrderController::class);
     Route::resource('/categories', CategoryController::class);
+    Route::resource('/products', App\Http\Controllers\Admin\ProductController::class);
 });
 
 
