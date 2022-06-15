@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Facades\UploadImage;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
@@ -38,7 +39,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        Product::create($request->all());
+        $data = $request->all();
+
+        $data['image'] = UploadImage::uploadProductImage($request);
+
+        Product::create($data);
+
         return redirect()->route('admin.products.index');
     }
 

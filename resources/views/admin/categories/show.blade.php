@@ -10,7 +10,7 @@
                     class="rounded overflow-hidden p-4 m-4 group block mx-auto rounded-lg bg-white ring-1 ring-slate-900/5 space-y-3 border-indigo-400">
                     <div class="grid place-items-center">
                         <img class="w-full w-96 h-48"
-                             src="{{ asset($category->image) }}" alt="no image">
+                             src="{{ asset('storage/images/categories/' . $category->image) }}" alt="no image">
                     </div>
                     <div class="px-6 py-4">
                         <div class="text-left text-xl mb-4"><b>Name: </b>{{ $category->name }}</div>

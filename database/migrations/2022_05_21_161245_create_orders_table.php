@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('status')->nullable();
+            $table->string('status')->default('not confirmed');
             $table->string('name')->nullable();
             $table->string('phone')->nullable();
             $table->timestamps();

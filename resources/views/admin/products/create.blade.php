@@ -1,11 +1,11 @@
 @extends('admin.layout')
 
-@section('header', 'Create category')
+@section('header', 'Create product')
 
 @section('admin-content')
     <div class="py-5">
         <div class='overflow-x-auto w-full'>
-            <form action="{{ route('admin.products.store') }}" method="POST" class="px-8 pt-6 pb-2 mb-4 bg-white rounded">
+            <form action="{{ route('admin.products.store') }}" method="POST" class="px-8 pt-6 pb-2 mb-4 bg-white rounded" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-6">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name of product</label>
@@ -25,6 +25,7 @@
                 </div>
                 <div class="mb-6">
                     <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Choose image for product</label>
+                    <input type="file" class="block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-pointer focus:outline-none" name="image" id="image" accept=".jpg,.jpeg,.bmp,.png,.gif">
                 </div>
                 <div class="mb-6">
                     <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Price</label>

@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="px-6 pt-4">
-                <a href="{{ route('categories.show', $product->category->alias) }}"
+                <a href="{{ route('category.show', $product->category->alias) }}"
                    class="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 border border-gray-700 hover:border-indigo-200 hover:bg-gray-200">#{{ $product->category->name }}</a>
             </div>
         </div>
