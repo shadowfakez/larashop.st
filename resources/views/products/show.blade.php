@@ -9,7 +9,7 @@
         <div class="max-w-screen-xl rounded p-4">
             <div class="grid place-items-center">
                 <img class="w-full @if($product->category_id == 1) w-48 h-96 @else h-48 w-96 @endif"
-                     src="{{ asset($product->image) }}" alt="no image">
+                     src="{{ asset('storage/images/' . $product->category->alias . '/'. $product->image) }}" alt="no image">
             </div>
             <div class="px-6 py-4">
                 <p class="text-gray-700 text-justify text-base">
