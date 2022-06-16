@@ -6,6 +6,7 @@ use App\Facades\UploadImage;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -83,6 +84,12 @@ class CategoryController extends Controller
     {
         $category = Category::where('alias', $alias)->firstOrFail();
         $data = $request->all();
+        if ($request->file('image') !== null) {
+            Storage::delete('public/images/categories/' . $category->image);
+            $data['image'] = UploadImage::uploadCategoryImage($request);
+        } else {
+            $data['image'] = $category->image;
+        }
         $category->fill($data);
         if ($category->isDirty()) {
             $category->save();
@@ -101,6 +108,7 @@ class CategoryController extends Controller
     public function destroy($alias)
     {
         $category = Category::where('alias', $alias)->firstOrFail();
+        Storage::delete('public/images/categories/' . $category['image']);
         $category->delete();
         return redirect()->route('admin.categories.index')->with('success', 'Category ' . $category->name . ' was successfully deleted');
     }

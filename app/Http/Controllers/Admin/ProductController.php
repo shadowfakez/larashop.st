@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -86,6 +87,12 @@ class ProductController extends Controller
     {
         $product = Product::where('alias', $alias)->firstOrFail();
         $data = $request->all();
+        if ($request->file('image') !== null) {
+            Storage::delete('public/images/' . $product->category->alias . '/' . $product->image);
+            $data['image'] = UploadImage::uploadProductImage($request);
+        } else {
+            $data['image'] = $product->image;
+        }
         $product->fill($data);
         if ($product->isDirty()) {
             $product->save();
@@ -104,6 +111,7 @@ class ProductController extends Controller
     public function destroy($alias)
     {
         $product = Product::where('alias', $alias)->firstOrFail();
+        Storage::delete('public/images/' . $product->category->alias . '/' . $product['image']);
         $product->delete();
         return redirect()->route('admin.products.index')->with('success', 'Product ' . $product->name . ' was successfully deleted');
     }

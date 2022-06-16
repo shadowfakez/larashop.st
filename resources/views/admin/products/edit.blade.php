@@ -28,9 +28,10 @@
                     <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Choose image for product</label>
                 </div>
                 <div class="mb-6">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="category_id">
-                        Choose category for product
-                    </label>
+                    <img class="w-full @if($product->category_id == 1) w-12 h-24 @else h-12 w-24 @endif"
+                         src="{{ asset('storage/images/' . $product->category->alias . '/'. $product->image) }}" alt="no image">
+                    <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Choose image for product</label>
+                    <input type="file" class="block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-pointer focus:outline-none" name="image" id="image" accept=".jpg,.jpeg,.bmp,.png,.gif">
                     <div class="relative">
                         <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter
                             text-grey-darker py-3 px-4 pr-8 rounded" id="category_id" name="category_id" >

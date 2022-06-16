@@ -21,8 +21,6 @@ class UploadImage
 
     public function uploadProductImage($request)
     {
-
-
         if ($request->file('image')) {
             $category = Category::findOrFail($request->category_id)->alias . '/';
 
