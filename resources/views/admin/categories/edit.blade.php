@@ -5,7 +5,7 @@
 @section('admin-content')
     <div class="py-5">
         <div class='overflow-x-auto w-full'>
-            <form action="{{ route('admin.categories.update', $category->alias) }}" method="POST" class="px-8 pt-6 pb-2 mb-4 bg-white rounded" enctype="multipart/form-data">
+            <form action="{{ route('admin.categories.update', $category->id) }}" method="POST" class="px-8 pt-6 pb-2 mb-4 bg-white rounded" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mb-6">

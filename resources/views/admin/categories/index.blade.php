@@ -37,19 +37,19 @@
                                class="hover:text-rose-600">{{ $category->alias }}</a>
                         </td>
                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            <a type="button" href="{{ route('admin.categories.show', $category->alias) }}"
+                            <a type="button" href="{{ route('admin.categories.show', $category->id) }}"
                                     class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                                 Open
                             </a>
                         </td>
                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            <a type="button" href="{{ route('admin.categories.edit', $category->alias) }}"
+                            <a type="button" href="{{ route('admin.categories.edit', $category->id) }}"
                                     class="text-indigo-600 hover:text-white border border-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                                 Edit
                             </a>
                         </td>
                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            <form action="{{ route('admin.categories.destroy', $category->alias) }}" method="POST" class=" d-grid gap-2">
+                            <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST" class=" d-grid gap-2">
                                 @csrf
                                 @method('DELETE')
 

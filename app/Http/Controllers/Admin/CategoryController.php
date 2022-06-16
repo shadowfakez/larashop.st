@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Facades\UploadImage;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -36,7 +37,7 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         $data = $request->all();
 
@@ -53,9 +54,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show($alias)
+    public function show($id)
     {
-        $category = Category::where('alias', $alias)->firstOrFail();
+        $category = Category::where('id', $id)->firstOrFail();
 
         return view('admin.categories.show', compact('category'));
     }
@@ -66,9 +67,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function edit($alias)
+    public function edit($id)
     {
-        $category = Category::where('alias', $alias)->firstOrFail();
+        $category = Category::where('id', $id)->firstOrFail();
 
         return view('admin.categories.edit', compact('category'));
     }
@@ -80,9 +81,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $alias)
+    public function update(CategoryRequest $request, $id)
     {
-        $category = Category::where('alias', $alias)->firstOrFail();
+        $category = Category::where('id', $id)->firstOrFail();
+
         $data = $request->all();
         if ($request->file('image') !== null) {
             Storage::delete('public/images/categories/' . $category->image);
@@ -105,9 +107,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($alias)
+    public function destroy($id)
     {
-        $category = Category::where('alias', $alias)->firstOrFail();
+        $category = Category::where('id', $id)->firstOrFail();
         Storage::delete('public/images/categories/' . $category['image']);
         $category->delete();
         return redirect()->route('admin.categories.index')->with('success', 'Category ' . $category->name . ' was successfully deleted');

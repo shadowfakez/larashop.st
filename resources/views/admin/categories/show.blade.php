@@ -19,11 +19,11 @@
                         <div class="text-left text-xl mb-4"><b>Products count: </b>{{ $category->products()->count() }}</div>
                     </div>
                     <div class="px-6 py-4 flex justify-end">
-                        <a type="button" href="{{ route('admin.categories.edit', $category->alias) }}"
+                        <a type="button" href="{{ route('admin.categories.edit', $category->id) }}"
                                 class="text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                             Edit
                         </a>
-                        <form action="{{ route('admin.categories.destroy', $category->alias) }}" method="POST" class=" d-grid gap-2">
+                        <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST" class=" d-grid gap-2">
                             @csrf
                             @method('DELETE')
 

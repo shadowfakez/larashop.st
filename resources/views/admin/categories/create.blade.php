@@ -40,7 +40,4 @@
         </div>
     </div>
 
-    {{--<div class="items-center p-2 md:justify-between max-w-screen-2xl mx-auto">
-        {{ $category->links() }}
-    </div>--}}
 @endsection
