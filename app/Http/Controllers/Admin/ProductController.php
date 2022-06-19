@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Facades\UploadImage;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('admin.products.index', ['products' => Product::orderBy('created_at', 'asc')->paginate(10)]);
+        return view('admin.products.index', ['products' => Product::orderBy('created_at', 'desc')->paginate(6)]);
     }
 
     /**
@@ -38,8 +39,9 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
+
         $data = $request->all();
 
         $data['image'] = UploadImage::uploadProductImage($request);
@@ -55,9 +57,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show($alias)
+    public function show($id)
     {
-        $product = Product::where('alias', $alias)->firstOrFail();
+        $product = Product::where('id', $id)->firstOrFail();
 
         return view('admin.products.show', compact('product'));
     }
@@ -68,9 +70,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function edit($alias)
+    public function edit($id)
     {
-        $product = Product::where('alias', $alias)->firstOrFail();
+        $product = Product::where('id', $id)->firstOrFail();
         $categories = Category::all();
 
         return view('admin.products.edit', compact('product', 'categories'));
@@ -83,9 +85,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $alias)
+    public function update(ProductRequest $request, $id)
     {
-        $product = Product::where('alias', $alias)->firstOrFail();
+        $product = Product::where('id', $id)->firstOrFail();
         $data = $request->all();
         if ($request->file('image') !== null) {
             Storage::delete('public/images/' . $product->category->alias . '/' . $product->image);
@@ -108,9 +110,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($alias)
+    public function destroy($id)
     {
-        $product = Product::where('alias', $alias)->firstOrFail();
+        $product = Product::where('id', $id)->firstOrFail();
         Storage::delete('public/images/' . $product->category->alias . '/' . $product['image']);
         $product->delete();
         return redirect()->route('admin.products.index')->with('success', 'Product ' . $product->name . ' was successfully deleted');

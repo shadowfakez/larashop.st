@@ -13,6 +13,7 @@
                 <thead class="bg-gray-900">
                 <tr class="text-white text-left">
                     <th class="font-semibold text-sm uppercase px-6 py-4"> #</th>
+                    <th class="font-semibold text-sm uppercase px-6 py-4"> Image</th>
                     <th class="font-semibold text-sm uppercase px-6 py-4"> Name</th>
                     <th class="font-semibold text-sm uppercase px-6 py-4"> Alias</th>
                     <th class="font-semibold text-sm uppercase px-6 py-4"> Open</th>
@@ -27,6 +28,10 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             <a href=""
                                class="hover:text-rose-600">{{ $category->id }}</a>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            <img class="w-full h-12 w-24"
+                                 src="{{ isset($category->image) ? asset('storage/images/categories/' . $category->image) : asset('storage/images/default/no-image.png') }}" alt="no image">
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             <a href=""

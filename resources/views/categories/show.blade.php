@@ -12,7 +12,7 @@
                 class="max-w-md rounded overflow-hidden p-4 m-4 group block max-w-xs mx-auto rounded-lg bg-white ring-1 ring-slate-900/5 space-y-3 border-indigo-400">
                 <div class="grid place-items-center">
                     <img class="w-full @if($product->category_id == 1) w-48 h-96 @else h-48 w-96 @endif"
-                         src="{{ asset('storage/images/' . $product->category->alias . '/'. $product->image) }}" alt="no image">
+                         src="{{ isset($product->image) ? asset('storage/images/' . $product->category->alias . '/'. $product->image) : asset('storage/images/default/no-image.png') }}" alt="no image">
                 </div>
                 <div
                     class="max-w-sm rounded overflow-hidden p-4 m-4 group block mx-auto rounded-lg bg-gray-200 ring-1 ring-slate-900/5 space-y-3 border border-indigo-100 hover:border-indigo-200 hover:bg-indigo-100">

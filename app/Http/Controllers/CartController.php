@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
+    //TODO validation
     public function cart()
     {
 

@@ -30,7 +30,7 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             <img class="w-full @if($product->category_id == 1) w-12 h-24 @else h-12 w-24 @endif"
-                                 src="{{ asset('storage/images/' . $product->category->alias . '/'. $product->image) }}" alt="no image">
+                                 src="{{ isset($product->image) ? asset('storage/images/' . $product->category->alias . '/'. $product->image) : asset('storage/images/default/no-image.png') }}" alt="no image">
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             <a href=""
@@ -41,19 +41,19 @@
                                class="hover:text-rose-600">{{ $product->category->name }}</a>
                         </td>
                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            <a type="button" href="{{ route('admin.products.show', $product->alias) }}"
+                            <a type="button" href="{{ route('admin.products.show', $product->id) }}"
                                     class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                                 Open
                             </a>
                         </td>
                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            <a type="button" href="{{ route('admin.products.edit', $product->alias) }}"
+                            <a type="button" href="{{ route('admin.products.edit', $product->id) }}"
                                     class="text-indigo-600 hover:text-white border border-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                                 Edit
                             </a>
                         </td>
                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            <form action="{{ route('admin.products.destroy', $product->alias) }}" method="POST" class=" d-grid gap-2">
+                            <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" class=" d-grid gap-2">
                                 @csrf
                                 @method('DELETE')
 

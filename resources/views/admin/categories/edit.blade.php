@@ -22,8 +22,7 @@
                 </div>
                 <div class="mb-6">
                     <img class="w-full w-96 h-48"
-                         src="{{ asset('storage/images/categories/' . $category->image) }}" alt="no image">
-
+                         src="{{ isset($category->image) ? asset('storage/images/categories/' . $category->image) : asset('storage/images/default/no-image.png') }}" alt="no image">
                     <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Choose image for category</label>
                     <input type="file" class="block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-pointer focus:outline-none" name="image" id="image" accept=".jpg,.jpeg,.bmp,.png,.gif">
                 </div>
