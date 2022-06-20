@@ -19,6 +19,7 @@
                     <th class="font-semibold text-sm uppercase px-6 py-4"> Date</th>
                     <th class="font-semibold text-sm uppercase px-6 py-4"> Value</th>
                     <th class="font-semibold text-sm uppercase px-6 py-4"> Open</th>
+                    <th class="font-semibold text-sm uppercase px-6 py-4"> Delete</th>
                 </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
@@ -47,8 +48,13 @@
                             {{ $order->getTotalValue() }} ₴
                         </td>
                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            <a href="#"
+                            <a href="{{ route('admin.orders.show', $order->id) }}"
                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Open</a>
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            @if ($order->status == 'not confirmed')
+                            <a href="#" class="font-medium text-red-600 dark:text-blue-500 hover:underline">Delete</a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

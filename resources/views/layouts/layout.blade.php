@@ -35,14 +35,11 @@
         <nav>
             <ul class="lg:flex items-center justify-between text-base text-gray-700 pt-4 lg:pt-0">
                 <li>
-                    <a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 hover:bg-indigo-100"
-                       href="{{ route('products.index') }}">Products</a></li>
+                    <a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 hover:bg-indigo-100 @layoutActiveRoute('products*')" href="{{ route('products.index') }}">Products</a></li>
                 <li>
-                    <a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 hover:bg-indigo-100"
-                       href="{{ route('categories.main') }}">Categories</a></li>
+                    <a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 hover:bg-indigo-100 @layoutActiveRoute('categor*')" href="{{ route('categories.main') }}">Categories</a></li>
                 <li>
-                    <a class="lg:p-4 py-3 mr-48 px-0 block border-b-2 border-transparent hover:border-indigo-400 hover:bg-indigo-100"
-                       href="{{ route('cart') }}">Cart</a></li>
+                    <a class="lg:p-4 py-3 mr-48 px-0 block border-b-2 border-transparent hover:border-indigo-400 hover:bg-indigo-100 @layoutActiveRoute('cart*')" href="{{ route('cart') }}">Cart</a></li>
                 {{--<li><a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 lg:mb-0 mb-2" href="#">Support</a></li>--}}
                 @if (Route::has('login'))
                     @auth

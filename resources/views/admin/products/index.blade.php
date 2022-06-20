@@ -37,7 +37,7 @@
                                class="hover:text-rose-600">{{ $product->name }}</a>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                            <a href="{{ route('admin.categories.show', $product->category->alias) }}"
+                            <a href="{{ route('admin.categories.show', $product->category->id) }}"
                                class="hover:text-rose-600">{{ $product->category->name }}</a>
                         </td>
                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">

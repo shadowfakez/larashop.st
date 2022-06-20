@@ -10,7 +10,12 @@
             <h3 class="text-center text-xl font-bold sm:text-center">Total value of Your Order: {{ $order->getTotalValue() }} ₴</h3>
         </div>
         <div class="flex justify-center items-center px-6 py-4 max-w-screen-2xl mx-auto">
+            @auth
+            <h3 class="text-center text-lg">Provide your phone number so that our manager can contact you</h3>
+            @endauth
+            @guest
             <h3 class="text-center text-lg">Provide your name and phone number so that our manager can contact you</h3>
+            @endauth
         </div>
         <div class="flex justify-center items-center px-6 py-4 max-w-screen-2xl mx-auto">
             <form class="w-full max-w-sm" method="POST" action="{{ route('cart.confirm', $order) }}">

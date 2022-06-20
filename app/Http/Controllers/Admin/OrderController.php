@@ -16,7 +16,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::orderBy('created_at', 'asc')->paginate(10);
-        return view('admin.orders', compact('orders'));
+        return view('admin.orders.index', compact('orders'));
     }
 
     /**
@@ -48,7 +48,8 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        $order = Order::where('id', $id)->firstOrFail();
+        return view('admin.orders.show', compact('order'));
     }
 
     /**

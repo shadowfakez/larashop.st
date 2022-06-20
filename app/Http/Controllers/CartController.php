@@ -13,11 +13,9 @@ class CartController extends Controller
     //TODO validation
     public function cart()
     {
-
         $orderId = session('orderId');
-        $order = Order::find($orderId);
 
-        //dd($order->products()->where('order_id', $orderId)->first());
+        $order = Order::find($orderId);
 
         if (is_null($orderId)) {
             return view('cart.cart', compact('order'));
@@ -33,7 +31,6 @@ class CartController extends Controller
 
     public function addToCart($productId)
     {
-        //Session::forget('orderId');
         $orderId = session('orderId');
 
         if (is_null($orderId)) {
