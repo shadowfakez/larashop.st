@@ -7,9 +7,27 @@
 @section('content')
     <div class="flex justify-center items-center px-6 py-2 max-w-screen-2xl mx-auto">
         <div class="max-w-screen-xl rounded p-4">
-            <div class="grid place-items-center">
-                <img class="w-full @if($product->category_id == 1) w-48 h-96 @else h-48 w-96 @endif"
-                     src="{{ isset($product->image) ? asset('storage/images/' . $product->category->alias . '/'. $product->image) : asset('storage/images/default/no-image.png') }}" alt="no image">
+            <div class="bg-no-repeat bg-contain bg-center w-full h-48"
+                 style="background-image: url({{ isset($product->image) ? asset('storage/images/' . $product->category->alias . '/'. $product->image) : asset('storage/images/default/no-image.png') }})">
+                @if ($product->isNew())
+                    <div class="">
+                        <a href="{{--{{ route('category.show', $product->category->alias) }}--}}"
+                           class="bg-green-700 rounded-full px-3 py-1 text-xs text-white mr-2 mb-2 border border-indigo-100 hover:border-indigo-200 hover:bg-gray-200 hover:text-gray-700">New
+                            product!</a>
+                    </div>
+                @endif
+                @if ($product->isHit())
+                    <div class="">
+                        <a href="{{--{{ route('category.show', $product->category->alias) }}--}}"
+                           class="bg-yellow-500 rounded-full px-3 py-1 text-xs text-white mr-2 mb-2 border border-indigo-100 hover:border-indigo-200 hover:bg-gray-200 hover:text-gray-700">Hit!</a>
+                    </div>
+                @endif
+                @if ($product->isRecommend())
+                    <div class="">
+                        <a href="{{--{{ route('category.show', $product->category->alias) }}--}}"
+                           class="bg-red-600 rounded-full px-3 py-1 text-xs text-white mr-2 mb-2 border border-indigo-100 hover:border-indigo-200 hover:bg-gray-200 hover:text-gray-700">Recommended!</a>
+                    </div>
+                @endif
             </div>
             <div class="px-6 py-4">
                 <p class="text-gray-700 text-justify text-base">

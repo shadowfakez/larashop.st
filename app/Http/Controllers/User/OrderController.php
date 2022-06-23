@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -15,8 +16,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::orderBy('created_at', 'desc')->paginate(10);
-        return view('admin.orders.index', compact('orders'));
+
     }
 
     /**
@@ -46,10 +46,12 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Order $order)
     {
-        $order = Order::where('id', $id)->firstOrFail();
-        return view('admin.orders.show', compact('order'));
+        if (!Auth::user()->orders->contains($order)) {
+            return back();
+        }
+        return view('user.order-show', compact('order'));
     }
 
     /**

@@ -7,13 +7,31 @@
 @section('content')
     <div class="flex flex-col xl:flex-row md:justify-between px-6 py-2 max-w-screen-2xl mx-auto">
         @foreach($products as $product)
-
             <div class="max-w-md rounded overflow-hidden p-4 m-4 group block max-w-xs mx-auto rounded-lg bg-white ring-1 ring-slate-900/5 space-y-3 border-indigo-400">
-                <div class="grid place-items-center">
-                    <img class="w-full @if($product->category_id == 1) w-48 h-96 @else h-48 w-96 @endif"
-                         src="{{ isset($product->image) ? asset('storage/images/' . $product->category->alias . '/'. $product->image) : asset('storage/images/default/no-image.png') }}" alt="no image">
+                <div class="bg-no-repeat bg-contain bg-center w-full h-48"
+                     style="background-image: url({{ isset($product->image) ? asset('storage/images/' . $product->category->alias . '/'. $product->image) : asset('storage/images/default/no-image.png') }})">
+                    @if ($product->isNew())
+                        <div class="">
+                            <a href="{{--{{ route('category.show', $product->category->alias) }}--}}"
+                               class="bg-green-700 rounded-full px-3 py-1 text-xs text-white mr-2 mb-2 border border-indigo-100 hover:border-indigo-200 hover:bg-gray-200 hover:text-gray-700">New
+                                product!</a>
+                        </div>
+                    @endif
+                    @if ($product->isHit())
+                        <div class="">
+                            <a href="{{--{{ route('category.show', $product->category->alias) }}--}}"
+                               class="bg-yellow-500 rounded-full px-3 py-1 text-xs text-white mr-2 mb-2 border border-indigo-100 hover:border-indigo-200 hover:bg-gray-200 hover:text-gray-700">Hit!</a>
+                        </div>
+                    @endif
+                    @if ($product->isRecommend())
+                        <div class="">
+                            <a href="{{--{{ route('category.show', $product->category->alias) }}--}}"
+                               class="bg-red-600 rounded-full px-3 py-1 text-xs text-white mr-2 mb-2 border border-indigo-100 hover:border-indigo-200 hover:bg-gray-200 hover:text-gray-700">Recommended!</a>
+                        </div>
+                    @endif
                 </div>
-                <div class="max-w-sm rounded overflow-hidden p-4 m-4 group block mx-auto rounded-lg bg-gray-200 ring-1 ring-slate-900/5 space-y-3 border border-indigo-100 hover:border-indigo-200 hover:bg-indigo-100">
+                <div
+                    class="max-w-sm rounded overflow-hidden p-4 m-4 group block mx-auto rounded-lg bg-gray-200 ring-1 ring-slate-900/5 space-y-3 border border-indigo-100 hover:border-indigo-200 hover:bg-indigo-100">
                     <a href="{{ route('products.show', ['product' => $product->alias]) }}">
                         <div class="px-6 py-4">
                             <div class="font-bold text-center text-xl mb-2">{{ $product->name }}</div>
@@ -40,11 +58,9 @@
                                 Add to cart
                             </button>
                         </form>
-
                     </div>
                 </div>
             </div>
-
         @endforeach
     </div>
     <div class="items-center p-2 md:justify-between max-w-screen-2xl mx-auto">

@@ -36,7 +36,5 @@ class Order extends Model
         } else {
             return false;
         }
-
-
     }
 }

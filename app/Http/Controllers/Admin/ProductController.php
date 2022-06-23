@@ -41,7 +41,6 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-
         $data = $request->all();
 
         $data['image'] = UploadImage::uploadProductImage($request);
@@ -73,6 +72,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::where('id', $id)->firstOrFail();
+
         $categories = Category::all();
 
         return view('admin.products.edit', compact('product', 'categories'));
@@ -90,15 +90,23 @@ class ProductController extends Controller
         $product = Product::where('id', $id)->firstOrFail();
         $data = $request->all();
         if ($request->file('image') !== null) {
-            Storage::delete('public/images/' . $product->category->alias . '/' . $product->image);
+            Storage::delete('public/images/'.$product->category->alias.'/'.$product->image);
             $data['image'] = UploadImage::uploadProductImage($request);
         } else {
             $data['image'] = $product->image;
         }
+
+        foreach (['new', 'hit', 'recommend'] as $fieldName) {
+            if (!isset($data[$fieldName])){
+                $data[$fieldName] = 0;
+            }
+        }
+
         $product->fill($data);
         if ($product->isDirty()) {
             $product->save();
-            return redirect()->route('admin.products.index')->with('success', 'Product ' . $product->name . ' was successfully updated');
+            return redirect()->route('admin.products.index')->with('success',
+                'Product '.$product->name.' was successfully updated');
         } else {
             return redirect()->route('admin.products.index')->with('warning', 'There is nothing to update');
         }
@@ -113,8 +121,9 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::where('id', $id)->firstOrFail();
-        Storage::delete('public/images/' . $product->category->alias . '/' . $product['image']);
+        Storage::delete('public/images/'.$product->category->alias.'/'.$product['image']);
         $product->delete();
-        return redirect()->route('admin.products.index')->with('success', 'Product ' . $product->name . ' was successfully deleted');
+        return redirect()->route('admin.products.index')->with('success',
+            'Product '.$product->name.' was successfully deleted');
     }
 }

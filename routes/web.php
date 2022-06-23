@@ -31,7 +31,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->middleware('is_admin
     Route::resource('/products', App\Http\Controllers\Admin\ProductController::class);
 });
 
-
+Route::resource('/order', App\Http\Controllers\User\OrderController::class)->only('show');
 Route::get('/cart', 'App\Http\Controllers\CartController@cart')->name('cart');
 Route::get('/cart/order', 'App\Http\Controllers\CartController@cartOrder')->name('cart.order');
 Route::post('/cart/confirm', 'App\Http\Controllers\CartController@cartConfirm')->name('cart.confirm');
