@@ -29,8 +29,10 @@
                                class="hover:text-rose-600">{{ $product->id }}</a>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                            <img class="w-full @if($product->category_id == 1) w-12 h-24 @else h-12 w-24 @endif"
-                                 src="{{ isset($product->image) ? asset('storage/images/' . $product->category->alias . '/'. $product->image) : asset('storage/images/default/no-image.png') }}" alt="no image">
+                            <div class="w-24 h-24">
+                                <img class="w-full"
+                                     src="{{ isset($product->image) ? asset('storage/images/' . $product->category->alias . '/'. $product->image) : asset('storage/images/default/no-image.png') }}" alt="no image">
+                            </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             <a href=""

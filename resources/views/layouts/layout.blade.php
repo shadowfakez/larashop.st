@@ -4,14 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    {{--<script
-        src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-        crossorigin="anonymous"></script>--}}
     <style>
         #menu-toggle:checked + #menu {
             display: block;
         }
+
         .dropdown:hover .dropdown-menu {
             display: block;
         }
@@ -35,36 +32,44 @@
         <nav>
             <ul class="lg:flex items-center justify-between text-base text-gray-700 pt-4 lg:pt-0">
                 <li>
-                    <a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 hover:bg-indigo-100 @layoutActiveRoute('products*')" href="{{ route('products.index') }}">Products</a></li>
+                    <a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 hover:bg-indigo-100 @layoutActiveRoute('products*')"
+                       href="{{ route('products.index') }}">Products</a></li>
                 <li>
-                    <a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 hover:bg-indigo-100 @layoutActiveRoute('categor*')" href="{{ route('categories.main') }}">Categories</a></li>
+                    <a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 hover:bg-indigo-100 @layoutActiveRoute('categor*')"
+                       href="{{ route('categories.main') }}">Categories</a></li>
                 <li>
-                    <a class="lg:p-4 py-3 mr-48 px-0 block border-b-2 border-transparent hover:border-indigo-400 hover:bg-indigo-100 @layoutActiveRoute('cart*')" href="{{ route('cart') }}">Cart</a></li>
-                {{--<li><a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 lg:mb-0 mb-2" href="#">Support</a></li>--}}
+                    <a class="lg:p-4 py-3 mr-48 px-0 block border-b-2 border-transparent hover:border-indigo-400 hover:bg-indigo-100 @layoutActiveRoute('cart*')"
+                       href="{{ route('cart') }}">Cart</a></li>
                 @if (Route::has('login'))
                     @auth
-
-                        <li>
-                        <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button
-                                    class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 text-blue-800 hover:bg-indigo-100"
-                                    type="submit">Logout
-                                </button>
-                            </form>
-                        </li>
                         <li>
                             <div class="dropdown inline-block relative">
-                                <button class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 text-blue-800 hover:bg-indigo-100 inline-flex items-center lg:justify-center justify-start w-36">
+                                <button
+                                    class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 text-blue-800 hover:bg-indigo-100 inline-flex items-center lg:justify-center justify-start w-36">
                                     <span class="mr-1">{{ Auth::user()->name }}</span>
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                    </svg>
                                 </button>
-                                <ul class="dropdown-menu absolute hidden text-gray-700 pt-1 w-36">
-                                    <li class=""><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('dashboard') }}">Dashboard</a></li>
+                                <ul class="dropdown-menu absolute hidden text-gray-700 pt-1 w-36 bg-white">
+                                    <li class="hover:bg-indigo-100 py-2 px-4 block whitespace-no-wrap"><a class=""
+                                                                                                          href="{{ route('dashboard') }}">Dashboard</a>
+                                    </li>
                                     @if (Auth::user()->isAdmin())
-                                    <li class=""><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('admin.home') }}">Admin Panel</a></li>
+                                        <li class="hover:bg-indigo-100 py-2 px-4 block whitespace-no-wrap"><a
+                                                href="{{ route('admin.home') }}">Admin Panel</a></li>
                                     @endif
+                                    <li class="text-blue-800 hover:bg-blue-800 hover:text-white py-2 px-4 block whitespace-no-wrap">
+                                        <form action="{{ route('logout') }}" method="POST">
+                                            @csrf
+                                            <button
 
+                                                type="submit">Logout
+                                            </button>
+                                        </form>
+                                    </li>
                                 </ul>
                             </div>
                         </li>

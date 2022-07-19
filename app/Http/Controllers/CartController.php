@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
@@ -32,7 +33,7 @@ class CartController extends Controller
     public function addToCart($productId)
     {
         $orderId = session('orderId');
-
+        $product = Product::find($productId);
         if (is_null($orderId)) {
             $order = Order::create();
             session(['orderId' => $order->id]);
@@ -48,13 +49,12 @@ class CartController extends Controller
             $order->products()->attach($productId);
         }
 
-        return redirect()->route('cart')->with('success', /*$order->products->find($productId)->name .*/ ' has been added to the cart');
+        return redirect()->route('cart')->with('success', $product->name . ' has been added to the cart');
     }
 
     public function removeFromCart($productId)
     {
         $orderId = session('orderId');
-
         if (is_null($orderId)) {
             return redirect()->route('cart');
         }
@@ -100,8 +100,11 @@ class CartController extends Controller
             $name = $request->name;
         }
 
-        $success = $order->saveOrder($name, $request->phone);
-
+        $order->name = $name;
+        $order->phone = $request->phone;
+        $order->status = 'confirmed';
+        $order->save();
+        session()->forget('orderId');
 
         return redirect()->route('home')->with('success', 'Your order has been confirmed!');
     }

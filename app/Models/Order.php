@@ -10,6 +10,13 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'status',
+        'name',
+        'user_id',
+        'phone',
+    ];
+
     public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class)->withPivot('count')->withTimestamps();
@@ -24,17 +31,4 @@ class Order extends Model
         return $sum;
     }
 
-    public function saveOrder($name, $phone)
-    {
-        if ($this->status == null) {
-            $this->name = $name;
-            $this->phone = $phone;
-            $this->status = 'confirmed';
-            $this->save();
-            session()->forget('orderId');
-            return true;
-        } else {
-            return false;
-        }
-    }
 }

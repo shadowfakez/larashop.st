@@ -30,8 +30,10 @@
                                class="hover:text-rose-600">{{ $category->id }}</a>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                            <img class="w-full h-12 w-24"
+                            <div class="w-24 h-24">
+                                <img class="w-full justify-center"
                                  src="{{ isset($category->image) ? asset('storage/images/categories/' . $category->image) : asset('storage/images/default/no-image.png') }}" alt="no image">
+                            </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             <a href=""

@@ -27,7 +27,7 @@ class ProductController extends Controller
                 $productQuerry->where($field, 1);
             }
         }
-        $products = $productQuerry->orderBy('created_at', 'desc')->paginate(3)->withPath('?' . $request->getQueryString());
+        $products = $productQuerry->orderBy('updated_at', 'desc')->paginate(3)->withPath('?' . $request->getQueryString());
         return view('products.index', compact('products'));
     }
 

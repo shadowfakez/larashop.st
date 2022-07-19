@@ -43,24 +43,24 @@
         @foreach($products as $product)
             <div class="max-w-md rounded overflow-hidden p-4 m-4 group block max-w-xs mx-auto rounded-lg bg-white ring-1 ring-slate-900/5 space-y-3 border-indigo-400">
                 <div class="bg-no-repeat bg-contain bg-center w-full h-48"
-                     style="background-image: url({{ isset($product->image) ? asset('storage/images/' . $product->category->alias . '/'. $product->image) : asset('storage/images/default/no-image.png') }})">
+                     style="background-image: url({{asset($product->image) ? asset('storage/images/' . $product->category->alias . '/'. $product->image) : asset('storage/images/default/no-image.png') }}">
                     @if ($product->isNew())
                         <div class="">
                             <a href="{{--{{ route('category.show', $product->category->alias) }}--}}"
-                               class="bg-green-700 rounded-full px-3 py-1 text-xs text-white mr-2 mb-2 border border-indigo-100 hover:border-indigo-200 hover:bg-gray-200 hover:text-gray-700">New
+                               class="bg-green-700 rounded-full px-3 py-1 text-xs text-white mr-2 mb-2 hover:border-indigo-200 hover:bg-gray-200 hover:text-gray-700">New
                                 product!</a>
                         </div>
                     @endif
                     @if ($product->isHit())
                         <div class="">
                             <a href="{{--{{ route('category.show', $product->category->alias) }}--}}"
-                               class="bg-yellow-500 rounded-full px-3 py-1 text-xs text-white mr-2 mb-2 border border-indigo-100 hover:border-indigo-200 hover:bg-gray-200 hover:text-gray-700">Hit!</a>
+                               class="bg-yellow-500 rounded-full px-3 py-1 text-xs text-white mr-2 mb-2 border-indigo-100 hover:border-indigo-200 hover:bg-gray-200 hover:text-gray-700">Hit!</a>
                         </div>
                     @endif
                     @if ($product->isRecommend())
                         <div class="">
                             <a href="{{--{{ route('category.show', $product->category->alias) }}--}}"
-                               class="bg-red-600 rounded-full px-3 py-1 text-xs text-white mr-2 mb-2 border border-indigo-100 hover:border-indigo-200 hover:bg-gray-200 hover:text-gray-700">Recommended!</a>
+                               class="bg-red-600 rounded-full px-3 py-1 text-xs text-white mr-2 mb-2 hover:border-red-600 hover:bg-gray-200 hover:text-gray-700">Recommended!</a>
                         </div>
                     @endif
                 </div>
