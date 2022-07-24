@@ -37,10 +37,17 @@
                     <div class="text-lg">
                         <form action="{{ route('add.to.cart', $product) }}" method="POST">
                             @csrf
-                            <button type="submit"
-                                    class="bg-transparent bg-gray-200 text-blue-800 font-semibold py-2 px-4 border rounded border-gray-700 hover:border-indigo-200 hover:bg-indigo-100">
-                                Add to cart
-                            </button>
+                            @if($product->isAvailable())
+                                <button type="submit"
+                                        class="bg-transparent bg-white text-blue-800 font-semibold py-2 px-4 border rounded border-blue-800 hover:border-blue-200 hover:bg-blue-100">
+                                    Add to cart
+                                </button>
+                            @else
+                                <span type="submit"
+                                      class="bg-transparent bg-white text-red-800 font-semibold py-2 px-4 border rounded border-red-700 hover:border-red-200 hover:bg-red-100">
+                                    Not available
+                                </span>
+                            @endif
                         </form>
                     </div>
                 </div>

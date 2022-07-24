@@ -24,8 +24,11 @@ class Product extends Model
         'price',
         'new',
         'hit',
-        'recommend'
+        'recommend',
+        'count',
     ];
+
+    public $with = ['category'];
 
     public function category(): BelongsTo
     {
@@ -93,5 +96,10 @@ class Product extends Model
     public function isRecommend()
     {
         return $this->recommend === 1;
+    }
+
+    public function isAvailable(): bool
+    {
+        return $this->count > 0;
     }
 }

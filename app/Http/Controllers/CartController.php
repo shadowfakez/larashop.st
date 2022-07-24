@@ -2,110 +2,56 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
 use App\Models\Product;
+use App\Services\Cart\Cart;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
-
 class CartController extends Controller
 {
     //TODO validation
+    //TODO добавь миграцию в orders - full value
     public function cart()
     {
-        $orderId = session('orderId');
+        $order = (new Cart())->getOrder();
 
-        $order = Order::find($orderId);
+        return view('cart.cart', compact('order'));
+    }
 
-        if (is_null($orderId)) {
-            return view('cart.cart', compact('order'));
+    public function addToCart(Product $product)
+    {
+        $result = (new Cart(true))->addProduct($product);
+
+        if ($result) {
+            return redirect()->route('cart')->with('success', $product->name . ' has been added to the cart');
         } else {
-            if (is_null($order->products()->where('order_id', $orderId)->first())) {
-                $order->delete();
-                Session::forget('orderId');
-                $order = Order::find($orderId);
-            }
-            return view('cart.cart', compact('order'));
+            return redirect()->route('cart')->with('warning', $product->name . ' is no longer available for order(the maximum number has been exceeded)');
         }
     }
 
-    public function addToCart($productId)
+    public function removeFromCart(Product $product)
     {
-        $orderId = session('orderId');
-        $product = Product::find($productId);
-        if (is_null($orderId)) {
-            $order = Order::create();
-            session(['orderId' => $order->id]);
-        } else {
-            $order = Order::find($orderId);
-        }
+        (new Cart())->removeProduct($product);
 
-        if ($order->products->contains($productId)) {
-            $addToCount = $order->products()->where('product_id', $productId)->first()->pivot;
-            $addToCount->count++;
-            $addToCount->update();
-        } else {
-            $order->products()->attach($productId);
-        }
-
-        return redirect()->route('cart')->with('success', $product->name . ' has been added to the cart');
-    }
-
-    public function removeFromCart($productId)
-    {
-        $orderId = session('orderId');
-        if (is_null($orderId)) {
-            return redirect()->route('cart');
-        }
-        $order = Order::find($orderId);
-
-        if ($order->products->contains($productId)) {
-            $addToCount = $order->products()->where('product_id', $productId)->first()->pivot;
-            if ($addToCount->count < 2) {
-                $order->products()->detach($productId);
-            } else {
-                $addToCount->count--;
-                $addToCount->update();
-            }
-        }
-
-        return redirect()->route('cart')->with('success', $order->products->find($productId)->name . ' has been removed from the cart');
+        return redirect()->route('cart')->with('success', $product->name . ' has been removed from the cart');
     }
 
     public function cartOrder()
     {
-        $orderId = session('orderId');
-        if (is_null($orderId)) {
-            return redirect('home');
+        $cart = new Cart;
+        $order = $cart->getOrder();
+        if (!$cart->countAvailable()) {
+            return redirect()->route('cart')->with('warning', 'Products no longer available for order(the maximum number has been exceeded)');
         }
-        $order = Order::find($orderId);
-
         return view('cart.order', compact('order'));
     }
 
     public function cartConfirm(Request $request)
     {
-        $orderId = session('orderId');
-
-        if (is_null($orderId)) {
-            return redirect()->route('cart');
-        }
-        $order = Order::find($orderId);
-
-        if (Auth::check()) {
-            $name = Auth::user()->name;
-            $order->user_id = Auth::id();
+        if ((new Cart())->saveOrder($request)) {
+            session()->flash('success', 'Your order has been confirmed!');
         } else {
-            $name = $request->name;
+            session()->flash('warning', 'Products no longer available for order(the maximum number has been exceeded)');
         }
 
-        $order->name = $name;
-        $order->phone = $request->phone;
-        $order->status = 'confirmed';
-        $order->save();
-        session()->forget('orderId');
-
-        return redirect()->route('home')->with('success', 'Your order has been confirmed!');
+        return redirect()->route('home');
     }
 }

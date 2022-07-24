@@ -16,6 +16,7 @@
                     <th class="font-semibold text-sm uppercase px-6 py-4"> Image</th>
                     <th class="font-semibold text-sm uppercase px-6 py-4"> Name</th>
                     <th class="font-semibold text-sm uppercase px-6 py-4"> Category</th>
+                    <th class="font-semibold text-sm uppercase px-6 py-4"> Available quantity</th>
                     <th class="font-semibold text-sm uppercase px-6 py-4"> Open</th>
                     <th class="font-semibold text-sm uppercase px-6 py-4"> Edit</th>
                     <th class="font-semibold text-sm uppercase px-6 py-4"> Delete</th>
@@ -41,6 +42,9 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             <a href="{{ route('admin.categories.show', $product->category->id) }}"
                                class="hover:text-rose-600">{{ $product->category->name }}</a>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            <span class="hover:text-rose-600">{{ $product->count }}</span>
                         </td>
                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                             <a type="button" href="{{ route('admin.products.show', $product->id) }}"

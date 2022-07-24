@@ -25,6 +25,8 @@ class User extends Authenticatable
         'fb_id',
     ];
 
+    public $with = ['orders'];
+
     /**
      * The attributes that should be hidden for serialization.
      *

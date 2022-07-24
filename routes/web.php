@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Middleware\CartNotEmpty;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,11 +19,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
 Route::get('/dashboard', 'App\Http\Controllers\HomeController@dashboard')->name('dashboard')->middleware('auth');
-Route::get('/categories', 'App\Http\Controllers\HomeController@categoriesMain')->name('categories.main');
-Route::get('/category-show/{alias}', 'App\Http\Controllers\HomeController@categoryShow')->name('category.show');
+
+Route::get('/categories', 'App\Http\Controllers\CategoryController@categoriesMain')->name('categories.main');
+Route::get('/category-show/{alias}', 'App\Http\Controllers\CategoryController@categoryShow')->name('category.show');
 
 
-Route::resource('/products', ProductController::class);
+Route::resource('/products', ProductController::class)->only('index', 'show');
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->middleware('is_admin')->group(function () {
     Route::get('/', 'App\Http\Controllers\Admin\AdminController@index')->name('home');
@@ -32,10 +34,16 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->middleware('is_admin
 });
 
 Route::resource('/order', App\Http\Controllers\User\OrderController::class)->only('show');
-Route::get('/cart', 'App\Http\Controllers\CartController@cart')->name('cart');
-Route::get('/cart/order', 'App\Http\Controllers\CartController@cartOrder')->name('cart.order');
-Route::post('/cart/confirm', 'App\Http\Controllers\CartController@cartConfirm')->name('cart.confirm');
-Route::post('/cart/add/{id}', 'App\Http\Controllers\CartController@addToCart')->name('add.to.cart');
-Route::post('/cart/remove/{id}', 'App\Http\Controllers\CartController@removeFromCart')->name('remove.from.cart');
+
+Route::prefix('cart')->group(function () {
+    Route::post('/add/{product}', 'App\Http\Controllers\CartController@addToCart')->name('add.to.cart');
+    Route::middleware(CartNotEmpty::class)->group(function () {
+        Route::get('/', 'App\Http\Controllers\CartController@cart')->name('cart');
+        Route::get('/order', 'App\Http\Controllers\CartController@cartOrder')->name('cart.order');
+        Route::post('/confirm', 'App\Http\Controllers\CartController@cartConfirm')->name('cart.confirm');
+        Route::post('/remove/{product}', 'App\Http\Controllers\CartController@removeFromCart')->name('remove.from.cart');
+    });
+});
+
 
 require __DIR__ . '/auth.php';

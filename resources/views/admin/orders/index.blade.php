@@ -52,8 +52,16 @@
                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Open</a>
                         </td>
                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            @if ($order->status == 'not confirmed')
-                            <a href="#" class="font-medium text-red-600 dark:text-blue-500 hover:underline">Delete</a>
+                            @if($order->status == 'not confirmed')
+                            <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST" class=" d-grid gap-2">
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit" onclick="return confirm('You want to delete {{ $order->id }} order! Please, confirm your action!')"
+                                        class="font-medium text-red-600 dark:text-blue-500 hover:underline">
+                                    Delete
+                                </button>
+                            </form>
                             @endif
                         </td>
                     </tr>
