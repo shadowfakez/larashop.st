@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 
 class Product extends Model
@@ -101,5 +102,13 @@ class Product extends Model
     public function isAvailable(): bool
     {
         return $this->count > 0;
+    }
+
+    public function checkSubscription()
+    {
+        if (Subscription::where('user_id', Auth::user()->id)->where('product_id', $this->id)->where('status', "not available")->exists()) {
+            return true;
+        }
+        return false;
     }
 }

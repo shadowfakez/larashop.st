@@ -2,8 +2,10 @@
 
 namespace App\Services\Cart;
 
+use App\Mail\OrderCreated;
 use App\Models\Order;
 use App\Models\Product;
+use Illuminate\Support\Facades\Mail;
 
 class Cart
 {
@@ -31,26 +33,34 @@ class Cart
         return $this->order;
     }
 
-    public function countAvailable()
+    public function countAvailable($updateCount = false)
     {
         foreach ($this->order->products as $orderProduct)
         {
-            if ($orderProduct->count < $this->getPivotRow($orderProduct)->count){
+            if ($orderProduct->count < $this->getPivotRow($orderProduct)->count) {
                 return false;
             }
+            if ($updateCount) {
+                $orderProduct->count -= $this->getPivotRow($orderProduct)->count;
+            }
         }
+
+        if ($updateCount) {
+            $this->order->products->map->save();
+        }
+
         return true;
     }
 
     public function saveOrder($request)
     {
-        if (!$this->countAvailable()) {
+        if (!$this->countAvailable(true)) {
             return false;
         }
         return $this->order->saveOrder($request);
     }
 
-    protected function getPivotRow($product)
+    public function getPivotRow($product)
     {
         return $this->order->products()->where('product_id', $product->id)->first()->pivot;
     }

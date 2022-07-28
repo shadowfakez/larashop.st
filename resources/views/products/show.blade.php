@@ -39,21 +39,49 @@
                         class="text-green-800">{{ $product->price }} ₴</span></div>
             </div>
             <div class="flex justify-center px-6 py-4">
-                <div class="text-lg">
-                    <form action="{{ route('add.to.cart', $product) }}" method="POST">
-                        @csrf
-                        @if($product->isAvailable())
+                <div class="text-lg ">
+
+                    @csrf
+                    @if($product->isAvailable())
+                        <form action="{{ route('add.to.cart', $product) }}" method="POST">
+                            @csrf
                             <button type="submit"
                                     class="bg-transparent bg-white text-blue-800 font-semibold py-2 px-4 border rounded border-blue-800 hover:border-blue-200 hover:bg-blue-100">
                                 Add to cart
                             </button>
-                        @else
+                        </form>
+                    @else
+                        <div class="flex justify-center">
                             <span type="submit"
                                   class="bg-transparent bg-white text-red-800 font-semibold py-2 px-4 border rounded border-red-700 hover:border-red-200 hover:bg-red-100">
-                                    Not available
-                                </span>
-                        @endif
-                    </form>
+                                                            Not available
+                                                </span>
+                        </div>
+
+                        <br>
+                        <hr>
+                        <div class="m-2 text-center">
+                            @auth()
+                                @if($product->checkSubscription())
+                                    <span>When {{ $product->name }} becomes available, you will receive an email!</span>
+                                @else
+                                    <span>Notify me when becomes available</span>
+                                    <div class="m-2 ">
+                                        <form action="{{ route('subscription', $product) }}" method="POST">
+                                            @csrf
+                                            <button type="submit"
+                                                    class="bg-transparent bg-white text-blue-800 font-semibold py-2 px-12 border rounded border-blue-800 hover:border-blue-200 hover:bg-blue-100">
+                                                Notify
+                                            </button>
+                                        </form>
+                                    </div>
+                                @endif
+                            @endauth
+                            @guest()
+                                <span>We can notify you when the product becomes available. Just log in and click "Notify"!</span>
+                            @endauth
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="px-6 pt-4">

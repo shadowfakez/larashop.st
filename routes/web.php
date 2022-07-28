@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
 Route::get('/dashboard', 'App\Http\Controllers\HomeController@dashboard')->name('dashboard')->middleware('auth');
 
+Route::post('/subscription/{product}', 'App\Http\Controllers\HomeController@subscribe')->name('subscription');
+
 Route::get('/categories', 'App\Http\Controllers\CategoryController@categoriesMain')->name('categories.main');
 Route::get('/category-show/{alias}', 'App\Http\Controllers\CategoryController@categoryShow')->name('category.show');
 

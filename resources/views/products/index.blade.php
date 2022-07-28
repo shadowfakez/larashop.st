@@ -10,11 +10,13 @@
             <div class="flex flex-row justify-center px-12 w-screen">
                 <span class="p-2">Price from</span>
                 <div class="p-2">
-                    <input class="w-24 h-6 focus:outline-none" name="price_from" type="text" value="{{ request()->price_from }}">
+                    <input class="w-24 h-6 focus:outline-none" name="price_from" type="text"
+                           value="{{ request()->price_from }}">
                 </div>
                 <span class="p-2">to</span>
                 <div class="p-2 mr-16">
-                    <input class="w-24 h-6" name="price_to" id="grid-last-name" type="text" value="{{ request()->price_to }}">
+                    <input class="w-24 h-6" name="price_to" id="grid-last-name" type="text"
+                           value="{{ request()->price_to }}">
                 </div>
                 <div class="m-2">
                     @foreach ([
@@ -22,16 +24,21 @@
                     'hit' => 'Hit product',
                     'recommend' => 'Recommended',
                        ] as $field => $title)
-                            <label for="{{ $field }}"
-                                   class="p-2 text-sm font-medium text-gray-900">{{ $title }}</label>
-                            <input type="checkbox" name="{{ $field }}" id="{{ $field }}" @if (request()->has($field)) checked @endif class="p-2 mr-16 text-green-600 bg-gray-100 border rounded focus:ring-green-500">
+                        <label for="{{ $field }}"
+                               class="p-2 text-sm font-medium text-gray-900">{{ $title }}</label>
+                        <input type="checkbox" name="{{ $field }}" id="{{ $field }}"
+                               @if (request()->has($field)) checked
+                               @endif class="p-2 mr-16 text-green-600 bg-gray-100 border rounded focus:ring-green-500">
                     @endforeach
                 </div>
                 <div class="m-2">
-                    <button type="submit" class="text-sm bg-transparent bg-indigo-800 text-gray-300 w-24 h-6 mx-2 border rounded border-gray-700 hover:text-indigo-800 hover:border-indigo-800 hover:bg-indigo-100">
+                    <button type="submit"
+                            class="text-sm bg-transparent bg-indigo-800 text-gray-300 w-24 h-6 mx-2 border rounded border-gray-700 hover:text-indigo-800 hover:border-indigo-800 hover:bg-indigo-100">
                         Filter
                     </button>
-                    <a href="{{ route('products.index') }} " class="text-sm text-center bg-transparent bg-red-800 text-gray-300 w-24 h-6 mx-2 border rounded border-gray-700 hover:text-red-800 hover:border-red-800 hover:bg-red-100" type="button">
+                    <a href="{{ route('products.index') }} "
+                       class="text-sm text-center bg-transparent bg-red-800 text-gray-300 w-24 h-6 mx-2 border rounded border-gray-700 hover:text-red-800 hover:border-red-800 hover:bg-red-100"
+                       type="button">
                         Reset
                     </a>
                 </div>
@@ -41,7 +48,8 @@
     <hr>
     <div class="flex flex-col xl:flex-row md:justify-between px-6 py-2 max-w-screen-2xl mx-auto">
         @foreach($products as $product)
-            <div class="max-w-md rounded overflow-hidden p-4 m-4 group block max-w-xs mx-auto rounded-lg bg-white ring-1 ring-slate-900/5 space-y-3 border-indigo-400">
+            <div
+                class="max-w-md rounded overflow-hidden p-4 m-4 group block max-w-xs mx-auto rounded-lg bg-white ring-1 ring-slate-900/5 space-y-3 border-indigo-400">
                 <div class="bg-no-repeat bg-contain bg-center w-full h-48"
                      style="background-image: url({{asset($product->image) ? asset('storage/images/' . $product->category->alias . '/'. $product->image) : asset('storage/images/default/no-image.png') }}">
                     @if ($product->isNew())
@@ -85,20 +93,20 @@
                 </div>
                 <div class="flex justify-center px-6 py-4">
                     <div class="text-lg">
-                        <form action="{{ route('add.to.cart', $product) }}" method="POST">
-                            @csrf
-                            @if($product->isAvailable())
+                        @if($product->isAvailable())
+                            <form action="{{ route('add.to.cart', $product) }}" method="POST">
+                                @csrf
                                 <button type="submit"
                                         class="bg-transparent bg-white text-blue-800 font-semibold py-2 px-4 border rounded border-blue-800 hover:border-blue-200 hover:bg-blue-100">
                                     Add to cart
                                 </button>
-                            @else
-                                <span type="submit"
-                                      class="bg-transparent bg-white text-red-800 font-semibold py-2 px-4 border rounded border-red-700 hover:border-red-200 hover:bg-red-100">
+                            </form>
+                        @else
+                            <span type="submit"
+                                  class="bg-transparent bg-white text-red-800 font-semibold py-2 px-4 border rounded border-red-700 hover:border-red-200 hover:bg-red-100">
                                     Not available
-                                </span>
-                            @endif
-                        </form>
+                            </span>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Mail\OrderCreated;
+use App\Services\Cart\Cart;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 
 class Order extends Model
@@ -17,6 +20,7 @@ class Order extends Model
         'name',
         'user_id',
         'phone',
+        'email'
     ];
 
     public function products(): BelongsToMany
@@ -29,15 +33,20 @@ class Order extends Model
         if ($this->status == 'not confirmed') {
             if (Auth::check()) {
                 $name = Auth::user()->name;
+                $email = Auth::user()->email;
                 $this->user_id = Auth::id();
             } else {
                 $name = $request->name;
+                $email = $request->email;
             }
             $this->name = $name;
+            $this->email = $email;
             $this->phone = $request->phone;
             $this->status = 'confirmed';
             //$this->value = $this->getTotalValue();
             $this->save();
+            Mail::to($email)->send(new OrderCreated($this));
+
             session()->forget('orderId');
             self::eraseTotalValue();
             return true;
