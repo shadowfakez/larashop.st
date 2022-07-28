@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('locale/{locale}', 'App\Http\Controllers\HomeController@changeLocale')->name('locale');
+
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
 Route::get('/dashboard', 'App\Http\Controllers\HomeController@dashboard')->name('dashboard')->middleware('auth');
 

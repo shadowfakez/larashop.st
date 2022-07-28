@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -30,5 +31,15 @@ class HomeController extends Controller
             ]);
 
         return redirect()->back()->with('success', 'When ' . $product->name . ' becomes available, you will receive an email!');
+    }
+    public function changeLocale($locale)
+    {
+        $availableLocales = ['en', 'ua'];
+        if (!in_array($locale, $availableLocales)) {
+            $locale = config('app.locale');
+        }
+        session(['locale' => $locale]);
+        App::setLocale($locale);
+        return redirect()->back();
     }
 }

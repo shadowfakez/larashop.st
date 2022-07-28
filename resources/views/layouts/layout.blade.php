@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>@lang('main.online_shop')</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
         #menu-toggle:checked + #menu {
@@ -33,13 +34,16 @@
             <ul class="lg:flex items-center justify-between text-base text-gray-700 pt-4 lg:pt-0">
                 <li>
                     <a class="lg:p-4 h-full px-0 block border-b-2 border-transparent hover:border-indigo-400 hover:bg-indigo-100 @layoutActiveRoute('products*')"
-                       href="{{ route('products.index') }}">Products</a></li>
+                       href="{{ route('products.index') }}">{{ __('main.products') }}</a></li>
                 <li>
                     <a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 hover:bg-indigo-100 @layoutActiveRoute('categor*')"
                        href="{{ route('categories.main') }}">Categories</a></li>
                 <li>
                     <a class="lg:p-4 py-3 mr-48 px-0 block border-b-2 border-transparent hover:border-indigo-400 hover:bg-indigo-100 @layoutActiveRoute('cart*')"
                        href="{{ route('cart') }}">Cart</a></li>
+                <li>
+                    <a class="py-2 px-4 block border-b-2 border-indigo-400 bg-gradient-to-b from-indigo-200 via-cyan-100 to-blue-200 hover:bg-indigo-100"
+                       href="{{ route('locale', __('main.set_lang')) }}">{{ __('main.current_lang') }}</a></li>
                 @if (Route::has('login'))
                     @auth
                         <li>
@@ -54,20 +58,18 @@
                                     </svg>
                                 </button>
                                 <ul class="dropdown-menu absolute hidden text-gray-700 pt-1 w-36 bg-white">
-                                    <li class="hover:bg-indigo-100 py-2 px-4 block whitespace-no-wrap"><a class=""
-                                                                                                          href="{{ route('dashboard') }}">Dashboard</a>
+                                    <li class="hover:bg-indigo-100 py-2 px-4 block whitespace-no-wrap">
+                                        <a class="" href="{{ route('dashboard') }}">Dashboard</a>
                                     </li>
                                     @if (Auth::user()->isAdmin())
-                                        <li class="hover:bg-indigo-100 py-2 px-4 block whitespace-no-wrap"><a
-                                                href="{{ route('admin.home') }}">Admin Panel</a></li>
+                                        <li class="hover:bg-indigo-100 py-2 px-4 block whitespace-no-wrap">
+                                            <a href="{{ route('admin.home') }}">Admin Panel</a>
+                                        </li>
                                     @endif
                                     <li class="text-blue-800 hover:bg-blue-800 hover:text-white py-2 px-4 block whitespace-no-wrap">
                                         <form action="{{ route('logout') }}" method="POST">
                                             @csrf
-                                            <button
-
-                                                type="submit">Logout
-                                            </button>
+                                            <button type="submit">Logout</button>
                                         </form>
                                     </li>
                                 </ul>
