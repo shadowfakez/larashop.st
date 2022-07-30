@@ -18,7 +18,7 @@
                         <div class="text-left text-xl mb-4"><b>Description: </b>{{ $product->description }}</div>
                         <div class="text-left text-xl mb-4"><b>Short description: </b>{{ $product->short_desc }}</div>
                         <div class="text-left text-xl mb-4"><b>Category: </b>{{ $product->category->name }}</div>
-                        <div class="text-left text-xl mb-4"><b>Price: </b>{{ $product->price }} ₴</div>
+                        <div class="text-left text-xl mb-4"><b>Price: </b>{{ $product->price }} {{ \App\Services\Currency\CurrencyConversion::getCurrencySymbol() }}</div>
                     </div>
                     <div class="px-6 py-4 flex justify-end">
                         <a type="button" href="{{ route('admin.products.edit', $product->id) }}"

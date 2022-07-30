@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\Currency\CurrencyConversion;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -110,5 +111,10 @@ class Product extends Model
             return true;
         }
         return false;
+    }
+
+    public function getPriceAttribute($value)
+    {
+        return round(CurrencyConversion::convert($value), 2);
     }
 }

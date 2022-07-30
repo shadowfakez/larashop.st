@@ -25,7 +25,7 @@
                         </div>
                         <div class="px-6 py-4">
                             <div class="font-bold text-xl mb-2">Price: <span
-                                    class="text-green-800">{{ $product->price }} ₴</span></div>
+                                    class="text-green-800">{{ $product->price }} {{ \App\Services\Currency\CurrencyConversion::getCurrencySymbol() }}</span></div>
                         </div>
                     </a>
                 </div>

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>@lang('main.online_shop')</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.6.0.js') }}"></script>
     <style>
         #menu-toggle:checked + #menu {
             display: block;
@@ -37,13 +39,34 @@
                        href="{{ route('products.index') }}">{{ __('main.products') }}</a></li>
                 <li>
                     <a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 hover:bg-indigo-100 @layoutActiveRoute('categor*')"
-                       href="{{ route('categories.main') }}">Categories</a></li>
+                       href="{{ route('categories.main') }}">{{ __('main.categories') }}</a></li>
                 <li>
                     <a class="lg:p-4 py-3 mr-48 px-0 block border-b-2 border-transparent hover:border-indigo-400 hover:bg-indigo-100 @layoutActiveRoute('cart*')"
-                       href="{{ route('cart') }}">Cart</a></li>
+                       href="{{ route('cart') }}">{{ __('main.cart') }}</a></li>
                 <li>
-                    <a class="py-2 px-4 block border-b-2 border-indigo-400 bg-gradient-to-b from-indigo-200 via-cyan-100 to-blue-200 hover:bg-indigo-100"
+                    <a class="py-2 px-4 mx-2 block hover:bg-indigo-100 font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0  active:shadow-lg active:text-white transition duration-150 ease-in-out flex items-center whitespace-nowrap"
                        href="{{ route('locale', __('main.set_lang')) }}">{{ __('main.current_lang') }}</a></li>
+                <li>
+                    <div class="dropdown inline-block relative">
+                        <button class="py-2 px-4 block hover:bg-indigo-100 font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0  active:shadow-lg active:text-white transition duration-150 ease-in-out flex items-center whitespace-nowrap">
+                            <span class="mr-1">{{ \App\Services\Currency\CurrencyConversion::getCurrencyCode() }}</span>
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 20 20">
+                                <path
+                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                            </svg>
+                        </button>
+                        <ul class="dropdown-menu absolute hidden text-gray-700 pt-1 bg-white">
+                            @foreach(\App\Services\Currency\CurrencyConversion::getCurrencies()  as $currency)
+                            <li class="">
+                                <a class="py-2 px-6 block hover:bg-indigo-100 font-medium text-xs rounded items-center " href="{{ route('currency', $currency->code) }}">{{ $currency->code }}</a>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </li>
+                </li>
+
                 @if (Route::has('login'))
                     @auth
                         <li>
@@ -58,18 +81,18 @@
                                     </svg>
                                 </button>
                                 <ul class="dropdown-menu absolute hidden text-gray-700 pt-1 w-36 bg-white">
-                                    <li class="hover:bg-indigo-100 py-2 px-4 block whitespace-no-wrap">
-                                        <a class="" href="{{ route('dashboard') }}">Dashboard</a>
+                                    <li class="">
+                                        <a class="hover:bg-indigo-100 py-2 px-4 block whitespace-no-wrap" href="{{ route('dashboard') }}">{{ __('main.dashboard') }}</a>
                                     </li>
                                     @if (Auth::user()->isAdmin())
-                                        <li class="hover:bg-indigo-100 py-2 px-4 block whitespace-no-wrap">
-                                            <a href="{{ route('admin.home') }}">Admin Panel</a>
+                                        <li class="">
+                                            <a class="hover:bg-indigo-100 py-2 px-4 block whitespace-no-wrap" href="{{ route('admin.home') }}">{{ __('main.admin_panel') }}</a>
                                         </li>
                                     @endif
-                                    <li class="text-blue-800 hover:bg-blue-800 hover:text-white py-2 px-4 block whitespace-no-wrap">
+                                    <li class="">
                                         <form action="{{ route('logout') }}" method="POST">
                                             @csrf
-                                            <button type="submit">Logout</button>
+                                            <button class="text-blue-800 hover:bg-blue-800 hover:text-white py-2 px-4 block whitespace-no-wrap w-full" type="submit">{{ __('main.logout') }}</button>
                                         </form>
                                     </li>
                                 </ul>
@@ -78,11 +101,11 @@
                     @else
                         <li>
                             <a href="{{ route('login') }}"
-                               class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 text-blue-800 hover:bg-indigo-100">Login</a>
+                               class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 text-blue-800 hover:bg-indigo-100">{{ __('main.login') }}</a>
                         </li>
                         <li>
                             <a href="{{ route('register') }}"
-                               class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 text-blue-800 hover:bg-indigo-100">Register</a>
+                               class="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 text-blue-800 hover:bg-indigo-100">{{ __('main.register') }}</a>
                         </li>
                     @endauth
                 @endif

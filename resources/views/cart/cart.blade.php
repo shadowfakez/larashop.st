@@ -55,10 +55,10 @@
                                 </form>
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                {{ $product->price }} ₴
+                                {{ $product->price }} {{ \App\Services\Currency\CurrencyConversion::getCurrencySymbol() }}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                {{ $product->getValue() }} ₴
+                                {{ $product->getValue() }} {{ \App\Services\Currency\CurrencyConversion::getCurrencySymbol() }}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                 <a href="#"
@@ -73,7 +73,7 @@
             <div class='overflow-x-auto w-full'>
                 <div class='flex justify-end items-center p-4 mx-auto max-w-4xl w-full bg-white'>
                     <h1 class="items-center text-2xl font-bold inline-block mr-16">Total
-                        value: {{ $order->getTotalValue() }} ₴</h1>
+                        value: {{ $order->getTotalValue() }} {{ \App\Services\Currency\CurrencyConversion::getCurrencySymbol() }}</h1>
                     <a href="{{ route('cart.order') }}"
                        class="bg-transparent bg-gray-200 text-blue-800 font-semibold py-2 px-4 border rounded border-gray-700 hover:border-indigo-200 hover:bg-indigo-100">Confirm</a>
                 </div>
