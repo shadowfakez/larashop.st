@@ -35,7 +35,7 @@
                                 {{ $product->category->name }}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                <span class="mr-3">{{ $product->pivot->count }}</span>
+                                <span class="mr-3">{{ $product->countInOrder }}</span>
                                 <form action="{{ route('add.to.cart', $product) }}" class="inline-block"
                                       method="POST">
                                     @csrf
@@ -58,7 +58,7 @@
                                 {{ $product->price }} {{ \App\Services\Currency\CurrencyConversion::getCurrencySymbol() }}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                {{ $product->getValue() }} {{ \App\Services\Currency\CurrencyConversion::getCurrencySymbol() }}
+                                {{ $product->price * $product->countInOrder }} {{ \App\Services\Currency\CurrencyConversion::getCurrencySymbol() }}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                 <a href="#"

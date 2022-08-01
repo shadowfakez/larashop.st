@@ -42,15 +42,6 @@ class Product extends Model
         return $this->hasMany(Order::class);
     }
 
-    public function getValue()
-    {
-        if (!is_null($this->pivot->count)) {
-            return $this->price * $this->pivot->count;
-        } else {
-            return $this->price;
-        }
-    }
-
     /**
      * Interact with the user's first name.
      *
@@ -61,7 +52,6 @@ class Product extends Model
     protected function new(): Attribute
     {
         return Attribute::make(
-        /*get: fn ($value) => ucfirst($value),*/
             set: fn($value) =>
             $this->attributes['new'] = $value === 'on' ? 1 : 0,
         );
@@ -70,7 +60,6 @@ class Product extends Model
     protected function hit(): Attribute
     {
         return Attribute::make(
-        /*get: fn ($value) => ucfirst($value),*/
             set: fn($value) =>
             $this->attributes['hit'] = $value === 'on' ? 1 : 0,
         );
@@ -79,7 +68,6 @@ class Product extends Model
     protected function recommend(): Attribute
     {
         return Attribute::make(
-        /*get: fn ($value) => ucfirst($value),*/
             set: fn($value) =>
             $this->attributes['recommend'] = $value === 'on' ? 1 : 0,
         );

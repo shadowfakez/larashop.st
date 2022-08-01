@@ -46,7 +46,7 @@
                             {{ Carbon\Carbon::parse($order->created_at)->format('H:i d.m.Y') }}
                         </td>
                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            {{ $order->getTotalValue() }} {{ \App\Services\Currency\CurrencyConversion::getCurrencySymbol() }}
+                            {{ $order->getSumInCurrentCurrency() }}
                         </td>
                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                             <a href="{{ route('order.show', $order->id) }}"
