@@ -30,8 +30,6 @@ class ProductRequest extends FormRequest
             'description' => ['nullable'],
             'short_desc' => ['nullable'],
             'image' => ['nullable', 'image'],
-            'price' => ['required', 'numeric', 'min:0'],
-            'count' => ['required', 'numeric', 'min:0'],
         ];
         if ($this->getMethod() == "POST") {
             $rules += [

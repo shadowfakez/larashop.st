@@ -7,7 +7,7 @@
 @section('content')
     <div class="pt-4">
         <div class="flex justify-center items-center px-6 py-6 max-w-screen-2xl mx-auto">
-            <h3 class="text-center text-xl font-bold sm:text-center">Total value of Your Order: {{ $order->getTotalValue() }} {{ \App\Services\Currency\CurrencyConversion::getCurrencySymbol() }}</h3>
+            <h3 class="text-center text-xl font-bold sm:text-center">Total value of Your Order: {{ $order->getTotalValue() }} {{ $currencySymbol }}</h3>
         </div>
         <div class="flex justify-center items-center px-6 py-4 max-w-screen-2xl mx-auto">
             @auth

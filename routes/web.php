@@ -36,6 +36,10 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->middleware('is_admin
     Route::resource('/orders', OrderController::class);
     Route::resource('/categories', CategoryController::class);
     Route::resource('/products', App\Http\Controllers\Admin\ProductController::class);
+    Route::resource('/products/{product}/skus', App\Http\Controllers\Admin\SkuController::class);
+    Route::resource('/properties', App\Http\Controllers\Admin\PropertyController::class);
+    Route::resource('/properties/{property}/property-options', App\Http\Controllers\Admin\PropertyOptionController::class);
+
 });
 
 Route::resource('/order', App\Http\Controllers\User\OrderController::class)->only('show');

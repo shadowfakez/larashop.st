@@ -73,7 +73,7 @@
                     @endif
                 </div>
                 <div
-                    class="max-w-sm rounded overflow-hidden p-4 m-4 group block mx-auto rounded-lg bg-gray-200 ring-1 ring-slate-900/5 space-y-3 border border-indigo-100 hover:border-indigo-200 hover:bg-indigo-100">
+                    class="max-w-sm rounded overflow-hidden p-4 m-4 group block mx-auto rounded-lg bg-gray-50 ring-1 ring-slate-900/5 space-y-3 border border-indigo-100 hover:border-indigo-200 hover:bg-indigo-100">
                     <a href="{{ route('products.show', ['product' => $product->alias]) }}">
                         <div class="px-6 py-4">
                             <div class="font-bold text-center text-xl mb-2">{{ $product->name }}</div>
@@ -83,7 +83,7 @@
                         </div>
                         <div class="px-6 py-4">
                             <div class="font-bold text-xl mb-2">Price: <span
-                                    class="text-green-800">{{ $product->price }} {{ \App\Services\Currency\CurrencyConversion::getCurrencySymbol() }}</span></div>
+                                    class="text-green-800">{{ $product->price }} {{ $currencySymbol }}</span></div>
                         </div>
                     </a>
                 </div>

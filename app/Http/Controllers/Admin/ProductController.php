@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Property;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -30,7 +31,9 @@ class ProductController extends Controller
     public function create()
     {
 
-        return view('admin.products.create', ['categories' => Category::all()]);
+        $properties =  Property::all();
+
+        return view('admin.products.create', ['categories' => Category::all(), 'properties' => $properties]);
     }
 
     /**
@@ -75,7 +78,9 @@ class ProductController extends Controller
 
         $categories = Category::all();
 
-        return view('admin.products.edit', compact('product', 'categories'));
+        $properties =  Property::all();
+
+        return view('admin.products.edit', compact('product', 'categories', 'properties'));
     }
 
     /**
@@ -87,6 +92,7 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, $id)
     {
+
         $product = Product::where('id', $id)->firstOrFail();
         $data = $request->all();
         if ($request->file('image') !== null) {
@@ -103,6 +109,9 @@ class ProductController extends Controller
         }
 
         $product->fill($data);
+
+        $product->properties()->sync($request->property_id);
+
         if ($product->isDirty()) {
             $product->save();
             return redirect()->route('admin.products.index')->with('success',

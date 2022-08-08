@@ -17,8 +17,8 @@
         }
     </style>
 </head>
-<body class="antialiased bg-gray-200">
-<header class="lg:px-16 px-6 bg-white flex flex-wrap items-center lg:py-0 py-2">
+<body class="flex flex-col h-screen justify-between">
+<header class="lg:px-16 px-6 bg-white flex flex-wrap items-center lg:py-0 py-2 bg-gray-50">
     <div class="flex-1 flex justify-between items-center">
         <a href="{{ route('home') }}"><span class="text-blue-800">Lara</span>shop</a>
     </div>
@@ -48,8 +48,9 @@
                        href="{{ route('locale', __('main.set_lang')) }}">{{ __('main.current_lang') }}</a></li>
                 <li>
                     <div class="dropdown inline-block relative">
-                        <button class="py-2 px-4 block hover:bg-indigo-100 font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0  active:shadow-lg active:text-white transition duration-150 ease-in-out flex items-center whitespace-nowrap">
-                            <span class="mr-1">{{ \App\Services\Currency\CurrencyConversion::getCurrencyCode() }}</span>
+                        <button
+                            class="py-2 px-4 block hover:bg-indigo-100 font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0  active:shadow-lg active:text-white transition duration-150 ease-in-out flex items-center whitespace-nowrap">
+                            <span class="mr-1">{{ $currencyCode }}</span>
                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                  viewBox="0 0 20 20">
                                 <path
@@ -57,14 +58,14 @@
                             </svg>
                         </button>
                         <ul class="dropdown-menu absolute hidden text-gray-700 pt-1 bg-white">
-                            @foreach(\App\Services\Currency\CurrencyConversion::getCurrencies()  as $currency)
-                            <li class="">
-                                <a class="py-2 px-6 block hover:bg-indigo-100 font-medium text-xs rounded items-center " href="{{ route('currency', $currency->code) }}">{{ $currency->code }}</a>
-                            </li>
+                            @foreach($currencies  as $currency)
+                                <li class="">
+                                    <a class="py-2 px-6 block hover:bg-indigo-100 font-medium text-xs rounded items-center "
+                                       href="{{ route('currency', $currency->code) }}">{{ $currency->code }}</a>
+                                </li>
                             @endforeach
                         </ul>
                     </div>
-                </li>
                 </li>
 
                 @if (Route::has('login'))
@@ -82,17 +83,21 @@
                                 </button>
                                 <ul class="dropdown-menu absolute hidden text-gray-700 pt-1 w-36 bg-white">
                                     <li class="">
-                                        <a class="hover:bg-indigo-100 py-2 px-4 block whitespace-no-wrap" href="{{ route('dashboard') }}">{{ __('main.dashboard') }}</a>
+                                        <a class="hover:bg-indigo-100 py-2 px-4 block whitespace-no-wrap"
+                                           href="{{ route('dashboard') }}">{{ __('main.dashboard') }}</a>
                                     </li>
                                     @if (Auth::user()->isAdmin())
                                         <li class="">
-                                            <a class="hover:bg-indigo-100 py-2 px-4 block whitespace-no-wrap" href="{{ route('admin.home') }}">{{ __('main.admin_panel') }}</a>
+                                            <a class="hover:bg-indigo-100 py-2 px-4 block whitespace-no-wrap"
+                                               href="{{ route('admin.home') }}">{{ __('main.admin_panel') }}</a>
                                         </li>
                                     @endif
                                     <li class="">
                                         <form action="{{ route('logout') }}" method="POST">
                                             @csrf
-                                            <button class="text-blue-800 hover:bg-blue-800 hover:text-white py-2 px-4 block whitespace-no-wrap w-full" type="submit">{{ __('main.logout') }}</button>
+                                            <button
+                                                class="text-blue-800 hover:bg-blue-800 hover:text-white py-2 px-4 block whitespace-no-wrap w-full"
+                                                type="submit">{{ __('main.logout') }}</button>
                                         </form>
                                     </li>
                                 </ul>
@@ -113,40 +118,94 @@
         </nav>
     </div>
 </header>
-@if($errors->any())
-    @foreach($errors->all() as $error)
+<content class="mb-auto">
+    @if($errors->any())
+        @foreach($errors->all() as $error)
+            <div
+                class="flex flex-row items-center justify-between border-b border-indigo-100 shadow-sm mx-auto shadow-inner rounded p-3 bg-red-200 hover:border-indigo-200">
+                <p class="self-center"><b>Error! </b>{{ $error }}</p>
+                <strong class="text-xl align-center cursor-pointer alert-del">&times;</strong>
+            </div>
+        @endforeach
+    @endif
+    @if (session('success'))
         <div
-            class="flex flex-row items-center justify-between border-b border-indigo-100 shadow-sm mx-auto shadow-inner rounded p-3 bg-red-200 hover:border-indigo-200">
-            <p class="self-center"><b>Error! </b>{{ $error }}</p>
+            class="flex flex-row items-center justify-between border-b border-indigo-100 shadow-sm mx-auto shadow-inner rounded p-3 bg-green-200 hover:border-indigo-200">
+            <p class="self-center">
+                <b>Success! </b>{{ session('success') }}
+            </p>
             <strong class="text-xl align-center cursor-pointer alert-del">&times;</strong>
         </div>
-    @endforeach
-@endif
-@if (session('success'))
-    <div
-        class="flex flex-row items-center justify-between border-b border-indigo-100 shadow-sm mx-auto shadow-inner rounded p-3 bg-green-200 hover:border-indigo-200">
-        <p class="self-center">
-            <b>Success! </b>{{ session('success') }}
-        </p>
-        <strong class="text-xl align-center cursor-pointer alert-del">&times;</strong>
+    @endif
+
+    @if (session('warning'))
+        <div
+            class="flex flex-row items-center justify-between border-b border-indigo-100 shadow-sm mx-auto shadow-inner rounded p-3 bg-yellow-200 hover:border-indigo-200">
+            <p class="self-center">
+                <b>Warning! </b>{{ session('warning') }}
+            </p>
+            <strong class="text-xl align-center cursor-pointer alert-del">&times;</strong>
+        </div>
+    @endif
+
+    <div class="lg:p-4 py-3 px-0 block lg:mb-0 mb-2 mt-2">
+        <h1 class="text-center text-3xl font-bold">@yield('header')</h1>
     </div>
-@endif
 
-@if (session('warning'))
-    <div
-        class="flex flex-row items-center justify-between border-b border-indigo-100 shadow-sm mx-auto shadow-inner rounded p-3 bg-yellow-200 hover:border-indigo-200">
-        <p class="self-center">
-            <b>Warning! </b>{{ session('warning') }}
-        </p>
-        <strong class="text-xl align-center cursor-pointer alert-del">&times;</strong>
+
+    @yield('content')
+</content>
+
+
+<footer class="bg-white w-full dark:bg-gray-900">
+    <div class="bg-gray-50">
+        <div class="flex justify-center">
+            <div class="flex-col p-4 mx-auto">
+                <h2 class="mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">Larashop</h2>
+                <ul class="text-gray-500 dark:text-gray-400">
+                    <li class="mb-4">
+                        <a href="{{ route('home') }}" class=" hover:underline">Home</a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="{{ route('products.index') }}">{{ __('main.products') }}</a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="{{ route('categories.main') }}">{{ __('main.categories') }}</a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="{{ route('cart') }}">{{ __('main.cart') }}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="flex-col p-4 mx-auto">
+                <h2 class="mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">
+                    <a href="{{ route('categories.main') }}">{{ __('main.categories') }}</a>
+                </h2>
+                <ul class="text-gray-500 dark:text-gray-400">
+                    @foreach($categories as $category)
+                    <li class="mb-4">
+                        <a href="{{ route('category.show', ['alias' => $category->alias]) }}">{{ $category->name }}</a>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="flex-col p-4 mx-auto">
+                <h2 class="mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">{{ __('main.popular') }}</h2>
+                <ul class="text-gray-500 dark:text-gray-400">
+                    @foreach($popularProducts as $popularProduct)
+                        <li class="mb-4">
+                            <a href="{{ route('products.show', $popularProduct->alias) }}">{{ $popularProduct->name }}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+        <div class="py-6 px-4 bg-gray-100 dark:bg-gray-700 md:flex md:items-center md:justify-center">
+        <span class="text-sm text-gray-500 dark:text-gray-300 sm:text-center">© 2022 <a href="{{ route('home') }}">Larashop</a>
+        </span>
+        </div>
     </div>
-@endif
-
-<div class="lg:p-4 py-3 px-0 block shadow-sm lg:mb-0 mb-2 mt-2">
-    <h1 class="text-center text-3xl font-bold">@yield('header')</h1>
-</div>
-
-@yield('content')
+</footer>
 
 <script>
     let alert_del = document.querySelectorAll('.alert-del');

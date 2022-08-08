@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::directive('layoutActiveRoute', function ($route) {
-            return "<?php echo Route::currentRouteNamed($route) ? 'bg-gray-200' : '' ?>";
+            return "<?php echo Route::currentRouteNamed($route) ? 'bg-indigo-100' : '' ?>";
         });
 
         Blade::directive('adminLayoutActiveRoute', function ($route) {

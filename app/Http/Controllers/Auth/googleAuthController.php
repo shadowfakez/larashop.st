@@ -24,8 +24,8 @@ class googleAuthController extends Controller
             $isUser = User::where('google_id', $user->getId())->first();
             if ($isCurrentUser) {
                 if ($isUser) {
-                    Auth::login($isUser);
-                    return redirect()->route('home', true);
+                    Auth::login($isUser, true);
+                    return redirect()->route('home');
                 } else {
                     $isCurrentUser->update(['google_id' => $user->getId()]);
                     Auth::login($isCurrentUser, true);

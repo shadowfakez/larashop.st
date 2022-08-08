@@ -12,4 +12,7 @@ return [
     'logout' => 'Logout',
     'dashboard' => 'Dashboard',
     'admin_panel' => 'Admin Panel',
+
+    'popular' => 'Popular products',
+
 ];

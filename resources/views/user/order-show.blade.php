@@ -55,14 +55,14 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                 <a href=""
-                                   class="hover:text-rose-600">{{ $product->price }} {{ \App\Services\Currency\CurrencyConversion::getCurrencySymbol() }}</a>
+                                   class="hover:text-rose-600">{{ $product->price }} {{ $currencySymbol }}</a>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-center">
                                 <a href="" class="hover:text-rose-600">{{ $product->pivot->count }}</a>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                 <a href=""
-                                   class="hover:text-rose-600">{{ $product->price * $product->pivot->count }} {{ \App\Services\Currency\CurrencyConversion::getCurrencySymbol() }}</a>
+                                   class="hover:text-rose-600">{{ $product->price * $product->pivot->count }} {{ $currencySymbol }}</a>
                             </td>
                         </tr>
                     @endforeach
